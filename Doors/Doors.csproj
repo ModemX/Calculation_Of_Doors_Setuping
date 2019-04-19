@@ -109,9 +109,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Диаграмма ERD.docx" />
-    <None Include="Диаграмма Сущность-связь.docx" />
-    <None Include="ПЗ_Unredacted.docx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
