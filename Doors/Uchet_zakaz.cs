@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Doors
 {
@@ -17,7 +19,7 @@ namespace Doors
         {
             InitializeComponent();
         }
-        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + Application.StartupPath + @"\DOORS.mdf;Integrated Security=True;Connect Timeout=30";
+        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + System.Windows.Forms.Application.StartupPath + @"\doors.mdf;Integrated Security=True;Connect Timeout=30";
         public void ShowData()
         {
 
@@ -51,10 +53,151 @@ namespace Doors
 
 
             Connection.Close();
-        }        
+        }
+        public void Selpr()
+        {
+            SqlConnection Connection = new SqlConnection(ConnectionString);
+
+            Connection.Open();
+
+            SqlCommand comm1 = new SqlCommand("SELECT profil FROM Profili", Connection);
+            SqlDataReader myReader = comm1.ExecuteReader(CommandBehavior.CloseConnection);
+
+
+
+            comboBox3.Items.Clear();
+
+            while (myReader.Read())
+            {
+                comboBox3.Items.Add(myReader[0]);
+            }
+
+            comboBox3.SelectedIndex = 0;
+
+
+            Connection.Close();
+        }
         private void Uchet_zakaz_Load(object sender, EventArgs e)
         {
             ShowData();
+            Selpr();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                dataGridView1.Rows[i].Selected = false;
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    if (dataGridView1.Rows[i].Cells[j].Value != null)
+                        if (dataGridView1.Rows[i].Cells[2].Value.ToString() == comboBox3.Text)
+                        {
+                            dataGridView1.Rows[i].Selected = true;
+                            break;
+                        }
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+   
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+
+                if (Convert.ToDateTime(dataGridView1.Rows[i].Cells[1].Value) < dateTimePicker1.Value || Convert.ToDateTime(dataGridView1.Rows[i].Cells[1].Value) > dateTimePicker2.Value)
+                {
+                    dataGridView1.Rows[i].Visible = false;
+                }
+
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+
+                dataGridView1.Rows[i].Visible = true;
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            Add_zakaz f2 = new Add_zakaz();
+            f2.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SqlConnection Connection = new SqlConnection(ConnectionString);
+
+            string DelId = Convert.ToString(dataGridView1[0, dataGridView1.CurrentCell.RowIndex].Value);
+
+
+            string TextCommand = "Delete from Zakazy where id_zakaz=" + DelId;
+
+            SqlCommand Command = new SqlCommand(TextCommand, Connection);
+
+            Connection.Open();
+
+            Command.ExecuteNonQuery();
+
+            Connection.Close();
+
+            MessageBox.Show("данные удалены");
+
+            ShowData();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Excel.Application exApp = new Excel.Application();
+            exApp.Visible = true;
+            exApp.Workbooks.Add();
+            Worksheet workSheet = (Worksheet)exApp.ActiveSheet;
+            workSheet.Cells[1, 1] = "Код заказа";
+            workSheet.Cells[1, 2] = "Дата";
+            workSheet.Cells[1, 3] = "Профиль";
+            workSheet.Cells[1, 4] = "Высота (см)";
+            workSheet.Cells[1, 5] = "Ширина (см)";
+            workSheet.Cells[1, 6] = "Количество";
+            workSheet.Cells[1, 7] = "Установка";
+            workSheet.Cells[1, 8] = "Наличники";
+            workSheet.Cells[1, 9] = "Замок";
+            workSheet.Cells[1, 10] = "Ручка";
+            workSheet.Cells[1, 11] = "Петли";
+            workSheet.Cells[1, 12] = "Стоимость";
+            int rowExcel = 2;
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+             if   (dataGridView1.Rows[i].Visible == true) 
+            {
+                workSheet.Cells[rowExcel, "A"] = dataGridView1.Rows[i].Cells[0].Value;
+                workSheet.Cells[rowExcel, "B"] = dataGridView1.Rows[i].Cells[1].Value;
+                workSheet.Cells[rowExcel, "C"] = dataGridView1.Rows[i].Cells[2].Value;
+                workSheet.Cells[rowExcel, "D"] = dataGridView1.Rows[i].Cells[3].Value;
+                workSheet.Cells[rowExcel, "E"] = dataGridView1.Rows[i].Cells[4].Value;
+                workSheet.Cells[rowExcel, "F"] = dataGridView1.Rows[i].Cells[5].Value;
+                workSheet.Cells[rowExcel, "G"] = dataGridView1.Rows[i].Cells[6].Value;
+                workSheet.Cells[rowExcel, "H"] = dataGridView1.Rows[i].Cells[7].Value;
+                workSheet.Cells[rowExcel, "I"] = dataGridView1.Rows[i].Cells[8].Value;
+                workSheet.Cells[rowExcel, "J"] = dataGridView1.Rows[i].Cells[9].Value;
+                workSheet.Cells[rowExcel, "K"] = dataGridView1.Rows[i].Cells[10].Value;
+                workSheet.Cells[rowExcel, "L"] = dataGridView1.Rows[i].Cells[11].Value;
+                ++rowExcel;
+            }
+            workSheet.Columns.EntireColumn.AutoFit();
+            string pathToXmlFile;
+            pathToXmlFile = Environment.CurrentDirectory + "\\" + "Заказы.xlsx";
+
+            workSheet.SaveAs(pathToXmlFile);
+            exApp.Quit();
         }
     }
 }

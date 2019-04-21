@@ -27,5 +27,29 @@ namespace Doors
             Uchet_zakaz f1 = new Uchet_zakaz();
             f1.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Dop f1 = new Dop();
+            f1.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Add_zakaz f1 = new Add_zakaz();
+            f1.Show();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Calc f1 = new Calc();
+            f1.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Spravka f1 = new Spravka();
+            f1.Show();
+        }
     }
 }
