@@ -17,7 +17,7 @@ namespace Doors
         {
             InitializeComponent();
         }
-        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + System.Windows.Forms.Application.StartupPath + @"\DOORS.mdf;Integrated Security=True;Connect Timeout=30";
+        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + System.Windows.Forms.Application.StartupPath + @"\doors.mdf;Integrated Security=True;Connect Timeout=30";
         public void ShowData()
         {
 
@@ -87,9 +87,9 @@ namespace Doors
             string sql = string.Format("Insert Into Profili" +
                   "(id_profil, profil,cena) Values(@kod, @pr,@c)");
             SqlCommand cmd = new SqlCommand(sql, Connection);
-            cmd.Parameters.AddWithValue("@kod", Convert.ToString(max + 1));
-            cmd.Parameters.AddWithValue("@pr", textBox1.Text);
-            cmd.Parameters.AddWithValue("@c", textBox2.Text);
+            cmd.Parameters.Add("@kod", Convert.ToString(max + 1));
+            cmd.Parameters.Add("@pr", textBox1.Text);
+            cmd.Parameters.Add("@c", textBox2.Text);
             if (cmd.ExecuteNonQuery() == 1)
                 MessageBox.Show("Запись успешно добавлена.");
             ShowData();

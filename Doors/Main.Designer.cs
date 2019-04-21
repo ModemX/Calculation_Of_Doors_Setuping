@@ -83,6 +83,7 @@
             this.button2.Size = new System.Drawing.Size(113, 107);
             this.button2.TabIndex = 18;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label5
             // 
@@ -125,6 +126,7 @@
             this.button9.Size = new System.Drawing.Size(113, 107);
             this.button9.TabIndex = 24;
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // label3
             // 
@@ -145,6 +147,7 @@
             this.button3.Size = new System.Drawing.Size(113, 107);
             this.button3.TabIndex = 22;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
@@ -165,6 +168,7 @@
             this.button1.Size = new System.Drawing.Size(113, 107);
             this.button1.TabIndex = 26;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Main
             // 
