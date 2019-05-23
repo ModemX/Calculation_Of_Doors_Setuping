@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.Sql;
-using System.Data.SqlClient;
 
 namespace Doors
 {
@@ -17,20 +17,23 @@ namespace Doors
         {
             InitializeComponent();
         }
-        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + System.Windows.Forms.Application.StartupPath + @"\doors.mdf;Integrated Security=True;Connect Timeout=30";
+        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + System.Windows.Forms.Application.StartupPath + @"\Resources\doors.mdf;Integrated Security=True;Connect Timeout=30";
         public void ShowData()
         {
-
-
             SqlConnection Connection = new SqlConnection(ConnectionString);
 
             Connection.Open();
 
             SqlCommand comm = new SqlCommand("SELECT count(id_profil) FROM Profili", Connection);
-            Int32 kol = (Int32)comm.ExecuteScalar();
+            int kol = (int)comm.ExecuteScalar();
             if (kol > 0)
+            {
                 dataGridView1.RowCount = kol;
-            else dataGridView1.RowCount = 1;
+            }
+            else
+            {
+                dataGridView1.RowCount = 1;
+            }
 
             SqlCommand comm1 = new SqlCommand("SELECT * FROM Profili", Connection);
             SqlDataReader myReader = comm1.ExecuteReader(CommandBehavior.CloseConnection);
@@ -40,12 +43,9 @@ namespace Doors
             {
                 for (int j = 0; j < 3; j++)
                 {
-
                     dataGridView1[j, i].Value = Convert.ToString(myReader[j]);
-
                 }
                 i++;
-
             }
             Connection.Close();
         }
@@ -83,15 +83,18 @@ namespace Doors
             Connection.Open();
             SqlCommand comm = new SqlCommand("SELECT max(id_profil) FROM Profili", Connection);
 
-            Int32 max = (Int32)comm.ExecuteScalar();
+            int max = (int)comm.ExecuteScalar();
             string sql = string.Format("Insert Into Profili" +
                   "(id_profil, profil,cena) Values(@kod, @pr,@c)");
             SqlCommand cmd = new SqlCommand(sql, Connection);
-            cmd.Parameters.Add("@kod", Convert.ToString(max + 1));
-            cmd.Parameters.Add("@pr", textBox1.Text);
-            cmd.Parameters.Add("@c", textBox2.Text);
+            cmd.Parameters.AddWithValue("@kod", Convert.ToString(max + 1));
+            cmd.Parameters.AddWithValue("@pr", textBox1.Text);
+            cmd.Parameters.AddWithValue("@c", textBox2.Text);
             if (cmd.ExecuteNonQuery() == 1)
+            {
                 MessageBox.Show("Запись успешно добавлена.");
+            }
+
             ShowData();
             Connection.Close();
             textBox1.Clear();

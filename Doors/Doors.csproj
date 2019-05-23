@@ -175,10 +175,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="doors.mdf">
+    <EmbeddedResource Include="Resources\doors.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Content Include="doors_log.LDF">
+    <Content Include="Resources\doors_log.LDF">
       <DependentUpon>doors.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
