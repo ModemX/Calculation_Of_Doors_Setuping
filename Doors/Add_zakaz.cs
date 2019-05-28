@@ -80,5 +80,65 @@ namespace Doors
             }
             Connection.Close();
         }
+
+        private void CheckIsEverythingCorrect()
+        {
+            if (numericUpDown1.Value > 0 && IsStringCorrectWordsOnly(comboBox1.Text) && IsStringCorrectPositiveDigitsOnly(comboBox2.Text) && IsStringCorrectPositiveDigitsOnly(comboBox3.Text))
+            {
+                button1.Enabled = true;
+            }
+            else
+            {
+                button1.Enabled = false;
+            }
+        }
+        private void SomethingChanged(object sender, EventArgs e)
+        {
+            CheckIsEverythingCorrect();
+        }
+
+        private bool IsStringCorrectWordsOnly(string text)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                char symbol = (char)text[i];
+                if (char.IsLetter(symbol) || symbol == ' ')
+                {
+                    if (i == text.Length - 1)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        private bool IsStringCorrectPositiveDigitsOnly(string text)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                char symbol = (char)text[i];
+                if (char.IsNumber(symbol))
+                {
+                    if (i < text.Length)
+                    {
+                        int number = Convert.ToInt32(text);
+                        if (number >= 10)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
     }
 }

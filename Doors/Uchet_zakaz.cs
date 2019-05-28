@@ -49,11 +49,11 @@ namespace Doors
             int i = 0;
             while (myReader.Read())
             {
-                for (int j = 1; j < 12; j++)
+                for (int j = 0; j < 11; j++)
                 {
-
-                    dataGridView1[j, i].Value = Convert.ToString(myReader[j]);
-
+                    dataGridView1[j, i].Value = Convert.ToString(myReader[j+1]);
+                    if ((dataGridView1[j, i].Value as string).Contains(" 12:00:00 AM"))
+                        dataGridView1[j, i].Value = (dataGridView1[j, i].Value as string).Replace(" 12:00:00 AM", "");
                 }
                 i++;
             }
@@ -96,7 +96,7 @@ namespace Doors
                 {
                     if (dataGridView1.Rows[i].Cells[j].Value != null)
                     {
-                        if (dataGridView1.Rows[i].Cells[2].Value.ToString() == comboBox3.Text)
+                        if (dataGridView1.Rows[i].Cells[1].Value.ToString() == comboBox3.Text)
                         {
                             dataGridView1.Rows[i].Selected = true;
                             break;
@@ -111,7 +111,7 @@ namespace Doors
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
 
-                if (Convert.ToDateTime(dataGridView1.Rows[i].Cells[1].Value) < dateTimePicker1.Value || Convert.ToDateTime(dataGridView1.Rows[i].Cells[1].Value) > dateTimePicker2.Value)
+                if (Convert.ToDateTime(dataGridView1.Rows[i].Cells[0].Value + " 12:00:00 AM") < dateTimePicker1.Value || Convert.ToDateTime(dataGridView1.Rows[i].Cells[0].Value + " 12:00:00 AM") > dateTimePicker2.Value)
                 {
                     dataGridView1.Rows[i].Visible = false;
                 }
@@ -162,18 +162,17 @@ namespace Doors
             };
             exApp.Workbooks.Add();
             Worksheet workSheet = (Worksheet)exApp.ActiveSheet;
-            workSheet.Cells[1, 1] = "Код заказа";
-            workSheet.Cells[1, 2] = "Дата";
-            workSheet.Cells[1, 3] = "Профиль";
-            workSheet.Cells[1, 4] = "Высота (см)";
-            workSheet.Cells[1, 5] = "Ширина (см)";
-            workSheet.Cells[1, 6] = "Количество";
-            workSheet.Cells[1, 7] = "Установка";
-            workSheet.Cells[1, 8] = "Наличники";
-            workSheet.Cells[1, 9] = "Замок";
-            workSheet.Cells[1, 10] = "Ручка";
-            workSheet.Cells[1, 11] = "Петли";
-            workSheet.Cells[1, 12] = "Стоимость";
+            workSheet.Cells[1, 1] = "Дата";
+            workSheet.Cells[1, 2] = "Профиль";
+            workSheet.Cells[1, 3] = "Высота (см)";
+            workSheet.Cells[1, 4] = "Ширина (см)";
+            workSheet.Cells[1, 5] = "Количество";
+            workSheet.Cells[1, 6] = "Установка";
+            workSheet.Cells[1, 7] = "Наличники";
+            workSheet.Cells[1, 8] = "Замок";
+            workSheet.Cells[1, 9] = "Ручка";
+            workSheet.Cells[1, 10] = "Петли";
+            workSheet.Cells[1, 11] = "Стоимость";
             int rowExcel = 2;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
@@ -190,7 +189,6 @@ namespace Doors
                     workSheet.Cells[rowExcel, "I"] = dataGridView1.Rows[i].Cells[8].Value;
                     workSheet.Cells[rowExcel, "J"] = dataGridView1.Rows[i].Cells[9].Value;
                     workSheet.Cells[rowExcel, "K"] = dataGridView1.Rows[i].Cells[10].Value;
-                    workSheet.Cells[rowExcel, "L"] = dataGridView1.Rows[i].Cells[11].Value;
                     ++rowExcel;
                 }
             }

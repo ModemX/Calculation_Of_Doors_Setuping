@@ -87,6 +87,9 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(154, 21);
             this.comboBox2.TabIndex = 53;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
+            this.comboBox2.TextUpdate += new System.EventHandler(this.SomethingChanged);
+            this.comboBox2.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // comboBox1
             // 
@@ -95,6 +98,9 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(154, 21);
             this.comboBox1.TabIndex = 52;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
+            this.comboBox1.TextUpdate += new System.EventHandler(this.SomethingChanged);
+            this.comboBox1.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // button2
             // 
@@ -170,6 +176,9 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(154, 21);
             this.comboBox3.TabIndex = 63;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
+            this.comboBox3.TextUpdate += new System.EventHandler(this.SomethingChanged);
+            this.comboBox3.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // checkBox1
             // 
@@ -246,6 +255,7 @@
             0,
             0,
             0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // Add_zakaz
             // 
@@ -254,12 +264,12 @@
             this.ClientSize = new System.Drawing.Size(365, 605);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);

@@ -154,5 +154,66 @@ namespace Doors
             sum = Convert.ToDouble(comboBox5.Text) * Convert.ToDouble(comboBox2.Text) * Convert.ToDouble(comboBox3.Text) * Convert.ToDouble(numericUpDown1.Text) + Convert.ToDouble(textBox6.Text) * Convert.ToInt32(checkBox1.Checked) + Convert.ToDouble(textBox1.Text) * Convert.ToInt32(checkBox2.Checked) + Convert.ToDouble(textBox3.Text) * Convert.ToInt32(checkBox3.Checked) + Convert.ToDouble(textBox4.Text) * Convert.ToInt32(checkBox4.Checked) + Convert.ToDouble(textBox5.Text) * Convert.ToInt32(checkBox5.Checked);
             textBox2.Text = Convert.ToString(sum);
         }
+        private void SomethingChanged(object sender, EventArgs e)
+        {
+            CheckIsEverythingCorrect();
+        }
+        private void CheckIsEverythingCorrect()
+        {
+            if (numericUpDown1.Value > 0 && IsStringCorrectWordsOnly(comboBox1.Text) && IsStringCorrectPositiveDigitsOnly(comboBox2.Text) && IsStringCorrectPositiveDigitsOnly(comboBox3.Text))
+            {
+                button5.Visible = true;
+            }
+            else
+            {
+                button5.Visible = false;
+            }
+        }
+        private bool IsStringCorrectWordsOnly(string text)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                char symbol = text[i];
+                if (char.IsLetter(symbol) || symbol == ' ')
+                {
+                    if (i == text.Length - 1)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        private bool IsStringCorrectPositiveDigitsOnly(string text)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                char symbol = text[i];
+                if (char.IsNumber(symbol))
+                {
+                    if (i < text.Length)
+                    {
+                        int number = Convert.ToInt32(text);
+                        if (number >= 10)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+
     }
+
 }

@@ -36,6 +36,11 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -47,11 +52,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -67,6 +67,7 @@
             0,
             0,
             0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // groupBox1
             // 
@@ -137,6 +138,51 @@
             this.checkBox1.Text = "Установка";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // textBox5
+            // 
+            this.textBox5.Enabled = false;
+            this.textBox5.Location = new System.Drawing.Point(224, 195);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(10, 20);
+            this.textBox5.TabIndex = 80;
+            this.textBox5.Visible = false;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Enabled = false;
+            this.textBox4.Location = new System.Drawing.Point(224, 154);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(10, 20);
+            this.textBox4.TabIndex = 79;
+            this.textBox4.Visible = false;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Enabled = false;
+            this.textBox3.Location = new System.Drawing.Point(224, 115);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(10, 20);
+            this.textBox3.TabIndex = 78;
+            this.textBox3.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(224, 76);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(10, 20);
+            this.textBox1.TabIndex = 77;
+            this.textBox1.Visible = false;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Enabled = false;
+            this.textBox6.Location = new System.Drawing.Point(224, 34);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(10, 20);
+            this.textBox6.TabIndex = 76;
+            this.textBox6.Visible = false;
+            // 
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
@@ -150,6 +196,9 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(154, 21);
             this.comboBox3.TabIndex = 73;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
+            this.comboBox3.TextUpdate += new System.EventHandler(this.SomethingChanged);
+            this.comboBox3.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // label5
             // 
@@ -170,6 +219,9 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(154, 21);
             this.comboBox2.TabIndex = 71;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
+            this.comboBox2.TextUpdate += new System.EventHandler(this.SomethingChanged);
+            this.comboBox2.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // comboBox1
             // 
@@ -178,6 +230,9 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(154, 21);
             this.comboBox1.TabIndex = 70;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
+            this.comboBox1.TextUpdate += new System.EventHandler(this.SomethingChanged);
+            this.comboBox1.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // label3
             // 
@@ -242,51 +297,6 @@
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(81, 21);
             this.comboBox5.TabIndex = 83;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(224, 195);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(10, 20);
-            this.textBox5.TabIndex = 80;
-            this.textBox5.Visible = false;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(224, 154);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(10, 20);
-            this.textBox4.TabIndex = 79;
-            this.textBox4.Visible = false;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(224, 115);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(10, 20);
-            this.textBox3.TabIndex = 78;
-            this.textBox3.Visible = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(224, 76);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(10, 20);
-            this.textBox1.TabIndex = 77;
-            this.textBox1.Visible = false;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Enabled = false;
-            this.textBox6.Location = new System.Drawing.Point(224, 34);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(10, 20);
-            this.textBox6.TabIndex = 76;
-            this.textBox6.Visible = false;
             // 
             // Calc
             // 

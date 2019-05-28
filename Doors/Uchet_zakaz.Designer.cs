@@ -46,18 +46,17 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ширина = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Высота = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Профиль = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Дата = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Код_заказа = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Профиль = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Высота = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ширина = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +65,6 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Код_заказа,
             this.Дата,
             this.Профиль,
             this.Высота,
@@ -80,7 +78,7 @@
             this.Column6});
             this.dataGridView1.Location = new System.Drawing.Point(9, 87);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1246, 312);
+            this.dataGridView1.Size = new System.Drawing.Size(1153, 312);
             this.dataGridView1.TabIndex = 51;
             // 
             // button10
@@ -100,7 +98,7 @@
             "Б 101",
             "П 106",
             "И 104"});
-            this.comboBox3.Location = new System.Drawing.Point(177, 39);
+            this.comboBox3.Location = new System.Drawing.Point(129, 39);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(151, 21);
             this.comboBox3.TabIndex = 61;
@@ -116,7 +114,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 43);
+            this.label3.Location = new System.Drawing.Point(12, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 13);
             this.label3.TabIndex = 59;
@@ -137,7 +135,7 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(419, 27);
+            this.button2.Location = new System.Drawing.Point(320, 27);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(190, 43);
             this.button2.TabIndex = 57;
@@ -204,7 +202,7 @@
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
             this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(1062, 27);
+            this.button7.Location = new System.Drawing.Point(963, 27);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(190, 43);
             this.button7.TabIndex = 54;
@@ -217,7 +215,7 @@
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(853, 27);
+            this.button4.Location = new System.Drawing.Point(754, 27);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(190, 43);
             this.button4.TabIndex = 53;
@@ -230,7 +228,7 @@
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(645, 27);
+            this.button1.Location = new System.Drawing.Point(546, 27);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(190, 43);
             this.button1.TabIndex = 52;
@@ -248,71 +246,66 @@
             this.label1.Text = "label1";
             this.label1.Visible = false;
             // 
-            // Column6
+            // Дата
             // 
-            this.Column6.HeaderText = "Стоимость";
-            this.Column6.Name = "Column6";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Петли";
-            this.Column5.Name = "Column5";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Ручка";
-            this.Column4.Name = "Column4";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Замок";
-            this.Column3.Name = "Column3";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Наличники";
-            this.Column2.Name = "Column2";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Установка";
-            this.Column1.Name = "Column1";
-            // 
-            // Количество
-            // 
-            this.Количество.HeaderText = "Количество";
-            this.Количество.Name = "Количество";
-            // 
-            // Ширина
-            // 
-            this.Ширина.HeaderText = "Ширина (см)";
-            this.Ширина.Name = "Ширина";
-            // 
-            // Высота
-            // 
-            this.Высота.HeaderText = "Высота (см)";
-            this.Высота.Name = "Высота";
+            this.Дата.HeaderText = "Дата";
+            this.Дата.Name = "Дата";
             // 
             // Профиль
             // 
             this.Профиль.HeaderText = "Профиль";
             this.Профиль.Name = "Профиль";
             // 
-            // Дата
+            // Высота
             // 
-            this.Дата.HeaderText = "Дата";
-            this.Дата.Name = "Дата";
+            this.Высота.HeaderText = "Высота (см)";
+            this.Высота.Name = "Высота";
             // 
-            // Код_заказа
+            // Ширина
             // 
-            this.Код_заказа.HeaderText = "Код заказа";
-            this.Код_заказа.Name = "Код_заказа";
+            this.Ширина.HeaderText = "Ширина (см)";
+            this.Ширина.Name = "Ширина";
+            // 
+            // Количество
+            // 
+            this.Количество.HeaderText = "Количество";
+            this.Количество.Name = "Количество";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Установка";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Наличники";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Замок";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Ручка";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Петли";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Стоимость";
+            this.Column6.Name = "Column6";
             // 
             // Uchet_zakaz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 479);
+            this.ClientSize = new System.Drawing.Size(1174, 479);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.comboBox3);
@@ -356,7 +349,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Код_заказа;
         private System.Windows.Forms.DataGridViewTextBoxColumn Дата;
         private System.Windows.Forms.DataGridViewTextBoxColumn Профиль;
         private System.Windows.Forms.DataGridViewTextBoxColumn Высота;
