@@ -17,44 +17,48 @@ namespace Doors
         {
             InitializeComponent();
         }
-        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + Application.StartupPath + @"\doors.mdf;Integrated Security=True;Connect Timeout=30";
+        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + System.Windows.Forms.Application.StartupPath + @"\Resources\doors.mdf;Integrated Security=True;Connect Timeout=30";
         public void Selpr()
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-
-            Connection.Open();
-
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             SqlCommand comm1 = new SqlCommand("SELECT profil FROM Profili", Connection);
             SqlDataReader myReader = comm1.ExecuteReader(CommandBehavior.CloseConnection);
-
             comboBox1.Items.Clear();
-
             while (myReader.Read())
             {
                 comboBox1.Items.Add(myReader[0]);
             }
-
             comboBox1.SelectedIndex = 0;
-
             Connection.Close();
         }
         private void Add_zakaz_Load(object sender, EventArgs e)
         {
             Selpr();
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-
-            Connection.Open();
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             SqlCommand comm = new SqlCommand("SELECT max(id_zakaz) FROM Zakazy", Connection);
-
             int max = (int)comm.ExecuteScalar();
             string sql = string.Format("Insert Into Zakazy" +
                   "(id_zakaz, data, id_profil, vysota, shirina, kolvo,ustanovka,nalichniki,zamok,ruchka,petli) Values(@kod, @data, @pr, @v, @sh, @k, @u, @nal, @z, @r, @p)");
@@ -74,9 +78,7 @@ namespace Doors
             {
                 MessageBox.Show("Запись успешно добавлена.");
             }
-
             Connection.Close();
         }
     }
 }
-

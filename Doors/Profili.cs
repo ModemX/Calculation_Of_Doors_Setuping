@@ -21,9 +21,7 @@ namespace Doors
         public void ShowData()
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-
             Connection.Open();
-
             SqlCommand comm = new SqlCommand("SELECT count(id_profil) FROM Profili", Connection);
             int kol = (int)comm.ExecuteScalar();
             if (kol > 0)
@@ -34,10 +32,8 @@ namespace Doors
             {
                 dataGridView1.RowCount = 1;
             }
-
             SqlCommand comm1 = new SqlCommand("SELECT * FROM Profili", Connection);
             SqlDataReader myReader = comm1.ExecuteReader(CommandBehavior.CloseConnection);
-
             int i = 0;
             while (myReader.Read())
             {
@@ -57,32 +53,35 @@ namespace Doors
         private void button4_Click(object sender, EventArgs e)
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-
             string DelId = Convert.ToString(dataGridView1[0, dataGridView1.CurrentCell.RowIndex].Value);
-
-
             string TextCommand = "Delete from Profili where id_profil=" + DelId;
-
             SqlCommand Command = new SqlCommand(TextCommand, Connection);
-
-            Connection.Open();
-
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             Command.ExecuteNonQuery();
-
             Connection.Close();
-
             MessageBox.Show("данные удалены");
-
             ShowData();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-
-            Connection.Open();
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             SqlCommand comm = new SqlCommand("SELECT max(id_profil) FROM Profili", Connection);
-
             int max = (int)comm.ExecuteScalar();
             string sql = string.Format("Insert Into Profili" +
                   "(id_profil, profil,cena) Values(@kod, @pr,@c)");
@@ -94,7 +93,6 @@ namespace Doors
             {
                 MessageBox.Show("Запись успешно добавлена.");
             }
-
             ShowData();
             Connection.Close();
             textBox1.Clear();

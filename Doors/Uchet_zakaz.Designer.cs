@@ -30,18 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Uchet_zakaz));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Код_заказа = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Дата = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Профиль = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Высота = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ширина = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button10 = new System.Windows.Forms.Button();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -58,6 +46,18 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ширина = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Высота = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Профиль = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Дата = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Код_заказа = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -82,66 +82,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1246, 312);
             this.dataGridView1.TabIndex = 51;
-            // 
-            // Код_заказа
-            // 
-            this.Код_заказа.HeaderText = "Код заказа";
-            this.Код_заказа.Name = "Код_заказа";
-            // 
-            // Дата
-            // 
-            this.Дата.HeaderText = "Дата";
-            this.Дата.Name = "Дата";
-            // 
-            // Профиль
-            // 
-            this.Профиль.HeaderText = "Профиль";
-            this.Профиль.Name = "Профиль";
-            // 
-            // Высота
-            // 
-            this.Высота.HeaderText = "Высота (см)";
-            this.Высота.Name = "Высота";
-            // 
-            // Ширина
-            // 
-            this.Ширина.HeaderText = "Ширина (см)";
-            this.Ширина.Name = "Ширина";
-            // 
-            // Количество
-            // 
-            this.Количество.HeaderText = "Количество";
-            this.Количество.Name = "Количество";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Установка";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Наличники";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Замок";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Ручка";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Петли";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Стоимость";
-            this.Column6.Name = "Column6";
             // 
             // button10
             // 
@@ -308,6 +248,66 @@
             this.label1.Text = "label1";
             this.label1.Visible = false;
             // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Стоимость";
+            this.Column6.Name = "Column6";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Петли";
+            this.Column5.Name = "Column5";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Ручка";
+            this.Column4.Name = "Column4";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Замок";
+            this.Column3.Name = "Column3";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Наличники";
+            this.Column2.Name = "Column2";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Установка";
+            this.Column1.Name = "Column1";
+            // 
+            // Количество
+            // 
+            this.Количество.HeaderText = "Количество";
+            this.Количество.Name = "Количество";
+            // 
+            // Ширина
+            // 
+            this.Ширина.HeaderText = "Ширина (см)";
+            this.Ширина.Name = "Ширина";
+            // 
+            // Высота
+            // 
+            this.Высота.HeaderText = "Высота (см)";
+            this.Высота.Name = "Высота";
+            // 
+            // Профиль
+            // 
+            this.Профиль.HeaderText = "Профиль";
+            this.Профиль.Name = "Профиль";
+            // 
+            // Дата
+            // 
+            this.Дата.HeaderText = "Дата";
+            this.Дата.Name = "Дата";
+            // 
+            // Код_заказа
+            // 
+            this.Код_заказа.HeaderText = "Код заказа";
+            this.Код_заказа.Name = "Код_заказа";
+            // 
             // Uchet_zakaz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -352,6 +352,10 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Код_заказа;
         private System.Windows.Forms.DataGridViewTextBoxColumn Дата;
         private System.Windows.Forms.DataGridViewTextBoxColumn Профиль;
@@ -364,9 +368,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

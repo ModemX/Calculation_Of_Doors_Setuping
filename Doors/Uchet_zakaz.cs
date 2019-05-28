@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Doors
@@ -19,62 +19,66 @@ namespace Doors
         {
             InitializeComponent();
         }
-        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + System.Windows.Forms.Application.StartupPath + @"\doors.mdf;Integrated Security=True;Connect Timeout=30";
+        public string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + System.Windows.Forms.Application.StartupPath + @"\Resources\doors.mdf;Integrated Security=True;Connect Timeout=30";
         public void ShowData()
         {
-
-
             SqlConnection Connection = new SqlConnection(ConnectionString);
-
-            Connection.Open();
-
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.Application.Exit();
+            }
             SqlCommand comm = new SqlCommand("SELECT count(id_zakaz) FROM View1", Connection);
-            Int32 kol = (Int32)comm.ExecuteScalar();
+            int kol = (int)comm.ExecuteScalar();
             label5.Text = "всего записей - " + Convert.ToString(kol);
             if (kol > 0)
+            {
                 dataGridView1.RowCount = kol + 1;
-            else dataGridView1.RowCount = 1;
-
+            }
+            else
+            {
+                dataGridView1.RowCount = 1;
+            }
             SqlCommand comm1 = new SqlCommand("SELECT * FROM View1", Connection);
             SqlDataReader myReader = comm1.ExecuteReader(CommandBehavior.CloseConnection);
 
             int i = 0;
             while (myReader.Read())
             {
-                for (int j = 0; j < 12; j++)
+                for (int j = 1; j < 12; j++)
                 {
 
                     dataGridView1[j, i].Value = Convert.ToString(myReader[j]);
 
                 }
                 i++;
-
             }
-
-
             Connection.Close();
         }
         public void Selpr()
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-
-            Connection.Open();
-
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.Application.Exit();
+            }
             SqlCommand comm1 = new SqlCommand("SELECT profil FROM Profili", Connection);
             SqlDataReader myReader = comm1.ExecuteReader(CommandBehavior.CloseConnection);
-
-
-
             comboBox3.Items.Clear();
-
             while (myReader.Read())
             {
                 comboBox3.Items.Add(myReader[0]);
             }
-
             comboBox3.SelectedIndex = 0;
-
-
             Connection.Close();
         }
         private void Uchet_zakaz_Load(object sender, EventArgs e)
@@ -89,18 +93,21 @@ namespace Doors
             {
                 dataGridView1.Rows[i].Selected = false;
                 for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
                     if (dataGridView1.Rows[i].Cells[j].Value != null)
+                    {
                         if (dataGridView1.Rows[i].Cells[2].Value.ToString() == comboBox3.Text)
                         {
                             dataGridView1.Rows[i].Selected = true;
                             break;
                         }
+                    }
+                }
             }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-   
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
 
@@ -108,7 +115,6 @@ namespace Doors
                 {
                     dataGridView1.Rows[i].Visible = false;
                 }
-
             }
         }
 
@@ -116,20 +122,13 @@ namespace Doors
         {
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
-
                 dataGridView1.Rows[i].Visible = true;
-
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
             Add_zakaz f2 = new Add_zakaz();
             f2.Show();
         }
@@ -137,29 +136,30 @@ namespace Doors
         private void button4_Click(object sender, EventArgs e)
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-
             string DelId = Convert.ToString(dataGridView1[0, dataGridView1.CurrentCell.RowIndex].Value);
-
-
             string TextCommand = "Delete from Zakazy where id_zakaz=" + DelId;
-
             SqlCommand Command = new SqlCommand(TextCommand, Connection);
-
-            Connection.Open();
-
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.Application.Exit();
+            }
             Command.ExecuteNonQuery();
-
             Connection.Close();
-
             MessageBox.Show("данные удалены");
-
             ShowData();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Excel.Application exApp = new Excel.Application();
-            exApp.Visible = true;
+            Excel.Application exApp = new Excel.Application
+            {
+                Visible = true
+            };
             exApp.Workbooks.Add();
             Worksheet workSheet = (Worksheet)exApp.ActiveSheet;
             workSheet.Cells[1, 1] = "Код заказа";
@@ -176,26 +176,27 @@ namespace Doors
             workSheet.Cells[1, 12] = "Стоимость";
             int rowExcel = 2;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
-             if   (dataGridView1.Rows[i].Visible == true) 
             {
-                workSheet.Cells[rowExcel, "A"] = dataGridView1.Rows[i].Cells[0].Value;
-                workSheet.Cells[rowExcel, "B"] = dataGridView1.Rows[i].Cells[1].Value;
-                workSheet.Cells[rowExcel, "C"] = dataGridView1.Rows[i].Cells[2].Value;
-                workSheet.Cells[rowExcel, "D"] = dataGridView1.Rows[i].Cells[3].Value;
-                workSheet.Cells[rowExcel, "E"] = dataGridView1.Rows[i].Cells[4].Value;
-                workSheet.Cells[rowExcel, "F"] = dataGridView1.Rows[i].Cells[5].Value;
-                workSheet.Cells[rowExcel, "G"] = dataGridView1.Rows[i].Cells[6].Value;
-                workSheet.Cells[rowExcel, "H"] = dataGridView1.Rows[i].Cells[7].Value;
-                workSheet.Cells[rowExcel, "I"] = dataGridView1.Rows[i].Cells[8].Value;
-                workSheet.Cells[rowExcel, "J"] = dataGridView1.Rows[i].Cells[9].Value;
-                workSheet.Cells[rowExcel, "K"] = dataGridView1.Rows[i].Cells[10].Value;
-                workSheet.Cells[rowExcel, "L"] = dataGridView1.Rows[i].Cells[11].Value;
-                ++rowExcel;
+                if (dataGridView1.Rows[i].Visible == true)
+                {
+                    workSheet.Cells[rowExcel, "A"] = dataGridView1.Rows[i].Cells[0].Value;
+                    workSheet.Cells[rowExcel, "B"] = dataGridView1.Rows[i].Cells[1].Value;
+                    workSheet.Cells[rowExcel, "C"] = dataGridView1.Rows[i].Cells[2].Value;
+                    workSheet.Cells[rowExcel, "D"] = dataGridView1.Rows[i].Cells[3].Value;
+                    workSheet.Cells[rowExcel, "E"] = dataGridView1.Rows[i].Cells[4].Value;
+                    workSheet.Cells[rowExcel, "F"] = dataGridView1.Rows[i].Cells[5].Value;
+                    workSheet.Cells[rowExcel, "G"] = dataGridView1.Rows[i].Cells[6].Value;
+                    workSheet.Cells[rowExcel, "H"] = dataGridView1.Rows[i].Cells[7].Value;
+                    workSheet.Cells[rowExcel, "I"] = dataGridView1.Rows[i].Cells[8].Value;
+                    workSheet.Cells[rowExcel, "J"] = dataGridView1.Rows[i].Cells[9].Value;
+                    workSheet.Cells[rowExcel, "K"] = dataGridView1.Rows[i].Cells[10].Value;
+                    workSheet.Cells[rowExcel, "L"] = dataGridView1.Rows[i].Cells[11].Value;
+                    ++rowExcel;
+                }
             }
             workSheet.Columns.EntireColumn.AutoFit();
             string pathToXmlFile;
             pathToXmlFile = Environment.CurrentDirectory + "\\" + "Заказы.xlsx";
-
             workSheet.SaveAs(pathToXmlFile);
             exApp.Quit();
         }
