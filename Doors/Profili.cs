@@ -37,9 +37,9 @@ namespace Doors
             int i = 0;
             while (myReader.Read())
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 2; j++)
                 {
-                    dataGridView1[j, i].Value = Convert.ToString(myReader[j]);
+                    dataGridView1[j, i].Value = Convert.ToString(myReader[j+1]);
                 }
                 i++;
             }
@@ -53,8 +53,8 @@ namespace Doors
         private void button4_Click(object sender, EventArgs e)
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-            string DelId = Convert.ToString(dataGridView1[0, dataGridView1.CurrentCell.RowIndex].Value);
-            string TextCommand = "Delete from Profili where id_profil=" + DelId;
+            string DelId = Convert.ToString(dataGridView1.CurrentCell.RowIndex+1);
+            string TextCommand = $"Delete from Profili where id_profil='{DelId}'";
             SqlCommand Command = new SqlCommand(TextCommand, Connection);
             try
             {
@@ -66,7 +66,7 @@ namespace Doors
             }
             Command.ExecuteNonQuery();
             Connection.Close();
-            MessageBox.Show("данные удалены");
+            MessageBox.Show("Данные удалены");
             ShowData();
         }
 
