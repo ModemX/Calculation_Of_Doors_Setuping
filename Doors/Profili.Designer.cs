@@ -34,10 +34,10 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.Профиль = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Цена = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,6 +56,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 33;
+            this.textBox1.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // button4
             // 
@@ -81,6 +82,7 @@
             this.button1.TabIndex = 31;
             this.button1.Text = "           Добавить";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
@@ -93,6 +95,17 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(354, 218);
             this.dataGridView1.TabIndex = 30;
+            // 
+            // Профиль
+            // 
+            this.Профиль.HeaderText = "Профиль";
+            this.Профиль.Name = "Профиль";
+            this.Профиль.Width = 200;
+            // 
+            // Цена
+            // 
+            this.Цена.HeaderText = "Цена (1 см кв.)";
+            this.Цена.Name = "Цена";
             // 
             // label2
             // 
@@ -109,17 +122,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 35;
-            // 
-            // Профиль
-            // 
-            this.Профиль.HeaderText = "Профиль";
-            this.Профиль.Name = "Профиль";
-            this.Профиль.Width = 200;
-            // 
-            // Цена
-            // 
-            this.Цена.HeaderText = "Цена (1 см кв.)";
-            this.Цена.Name = "Цена";
+            this.textBox2.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // Profili
             // 
@@ -133,9 +136,12 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
+            this.MaximizeBox = false;
             this.Name = "Profili";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Профили";
             this.Load += new System.EventHandler(this.Profili_Load);
+            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.Profili_HelpRequested);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

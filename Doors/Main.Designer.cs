@@ -187,8 +187,12 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button5);
+            this.HelpButton = true;
+            this.MaximizeBox = false;
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Автоматизация стоимости расчета и установки дверей";
+            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.Main_HelpRequested);
             this.ResumeLayout(false);
             this.PerformLayout();
 

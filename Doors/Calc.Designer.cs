@@ -316,9 +316,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox5);
+            this.MaximizeBox = false;
             this.Name = "Calc";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Калькулятор стоимости";
             this.Load += new System.EventHandler(this.Calc_Load);
+            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.Calc_HelpRequested);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

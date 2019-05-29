@@ -277,9 +277,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBox2);
+            this.MaximizeBox = false;
             this.Name = "Add_zakaz";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добавить заказ";
             this.Load += new System.EventHandler(this.Add_zakaz_Load);
+            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.Add_zakaz_HelpRequested);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

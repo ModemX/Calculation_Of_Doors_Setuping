@@ -27,7 +27,7 @@ namespace Doors
             }
             catch (SqlException)
             {
-                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             SqlCommand comm1 = new SqlCommand("SELECT profil FROM Profili", Connection);
             SqlDataReader myReader = comm1.ExecuteReader(CommandBehavior.CloseConnection);
@@ -56,7 +56,7 @@ namespace Doors
             }
             catch (SqlException)
             {
-                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             SqlCommand comm = new SqlCommand("SELECT max(id_zakaz) FROM Zakazy", Connection);
             int max = (int)comm.ExecuteScalar();
@@ -139,6 +139,11 @@ namespace Doors
                 }
             }
             return false;
+        }
+
+        private void Add_zakaz_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\Resources\\HelpFile.chm");
         }
     }
 }

@@ -48,8 +48,12 @@ namespace Doors
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Spravka f1 = new Spravka();
-            f1.Show();
+            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\Resources\\HelpFile.chm");
+        }
+
+        private void Main_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\Resources\\HelpFile.chm");
         }
     }
 }

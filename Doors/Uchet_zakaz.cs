@@ -29,7 +29,7 @@ namespace Doors
             }
             catch (SqlException)
             {
-                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Windows.Forms.Application.Exit();
             }
             SqlCommand comm = new SqlCommand("SELECT count(id_zakaz) FROM View1", Connection);
@@ -68,7 +68,7 @@ namespace Doors
             }
             catch (SqlException)
             {
-                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Windows.Forms.Application.Exit();
             }
             SqlCommand comm1 = new SqlCommand("SELECT profil FROM Profili", Connection);
@@ -136,8 +136,7 @@ namespace Doors
         private void button4_Click(object sender, EventArgs e)
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-            string DelId = Convert.ToString(dataGridView1[0, dataGridView1.CurrentCell.RowIndex].Value);
-            string TextCommand = "Delete from Zakazy where id_zakaz=" + DelId;
+            string TextCommand = "Delete from Zakazy where id_zakaz=" + dataGridView1.CurrentCell.RowIndex;
             SqlCommand Command = new SqlCommand(TextCommand, Connection);
             try
             {
@@ -145,7 +144,7 @@ namespace Doors
             }
             catch (SqlException)
             {
-                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД, файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Windows.Forms.Application.Exit();
             }
             Command.ExecuteNonQuery();
@@ -197,6 +196,11 @@ namespace Doors
             pathToXmlFile = Environment.CurrentDirectory + "\\" + "Заказы.xlsx";
             workSheet.SaveAs(pathToXmlFile);
             exApp.Quit();
+        }
+
+        private void Uchet_zakaz_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\Resources\\HelpFile.chm");
         }
     }
 }
