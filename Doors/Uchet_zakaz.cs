@@ -51,9 +51,11 @@ namespace Doors
             {
                 for (int j = 0; j < 11; j++)
                 {
-                    dataGridView1[j, i].Value = Convert.ToString(myReader[j+1]);
+                    dataGridView1[j, i].Value = Convert.ToString(myReader[j + 1]);
                     if ((dataGridView1[j, i].Value as string).Contains(" 12:00:00 AM"))
+                    {
                         dataGridView1[j, i].Value = (dataGridView1[j, i].Value as string).Replace(" 12:00:00 AM", "");
+                    }
                 }
                 i++;
             }
@@ -136,7 +138,8 @@ namespace Doors
         private void button4_Click(object sender, EventArgs e)
         {
             SqlConnection Connection = new SqlConnection(ConnectionString);
-            string TextCommand = "Delete from Zakazy where id_zakaz=" + dataGridView1.CurrentCell.RowIndex;
+            int id_zakaz = dataGridView1.CurrentCell.RowIndex + 1;
+            string TextCommand = "Delete from Zakazy where id_zakaz=" + id_zakaz.ToString();
             SqlCommand Command = new SqlCommand(TextCommand, Connection);
             try
             {

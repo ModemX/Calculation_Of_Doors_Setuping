@@ -114,6 +114,17 @@ namespace Doors
             textBox3.Enabled = true;
             textBox4.Enabled = true;
             textBox5.Enabled = true;
+
+            if (IsTextValue(textBox1.Text) && IsTextValue(textBox2.Text) && IsTextValue(textBox3.Text) && IsTextValue(textBox4.Text) && IsTextValue(textBox5.Text) && textBox1.Enabled == true)
+            {
+                button1.Enabled = true;
+            }
+            else
+            {
+                button1.Enabled = false;
+            }
+
+            button2.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -135,7 +146,7 @@ namespace Doors
             zam = textBox3.Text;
             ruc = textBox4.Text;
             pet = textBox5.Text;
-            string sql = string.Format("UPDATE Dopolnitelno SET cena_ustanovki='{0}', cena_nalichniki='{1}', cena_zamki='{2}', cena_ruchka='{3}', cena_petli='{4}' WHERE id_dop=1", ust, nal, zam, ruc, pet);
+            string sql = string.Format($"UPDATE Dopolnitelno SET cena_ustanovki='{ust}', cena_nalichniki='{nal}', cena_zamki='{zam}', cena_ruchka='{ruc}', cena_petli='{pet}' WHERE id_dop=1");
             SqlCommand cmd = new SqlCommand(sql, Connection);
             if (cmd.ExecuteNonQuery() == 1)
             {
@@ -148,11 +159,53 @@ namespace Doors
             textBox3.Enabled = false;
             textBox4.Enabled = false;
             textBox5.Enabled = false;
+
+            button1.Enabled = false;
+            button2.Enabled = true;
         }
 
         private void Dop_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\Resources\\HelpFile.chm");
+        }
+
+        private void SomethingChanged(object sender, EventArgs e)
+        {
+            if (IsTextValue(textBox1.Text) && IsTextValue(textBox2.Text) && IsTextValue(textBox3.Text) && IsTextValue(textBox4.Text) && IsTextValue(textBox5.Text) && textBox1.Enabled == true)
+            {
+                button1.Enabled = true;
+            }
+            else
+            {
+                button1.Enabled = false;
+            }
+        }
+
+        private bool IsTextValue(string Text)
+        {
+            if (Text.Length == 0)
+            {
+                return false;
+            }
+            else
+            {
+                for (int i = 0; i < Text.Length; i++)
+                {
+                    char symbol = Text[i];
+                    if (char.IsDigit(symbol))
+                    {
+                        if(i == Text.Length - 1)
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
