@@ -151,7 +151,12 @@ namespace Doors
             sum = 0;
             textBox2.Clear();
             comboBox5.SelectedIndex = comboBox1.SelectedIndex;
-            sum = Convert.ToDouble(comboBox5.Text) * Convert.ToDouble(comboBox2.Text) * Convert.ToDouble(comboBox3.Text) * Convert.ToDouble(numericUpDown1.Text) + Convert.ToDouble(textBox6.Text) * Convert.ToInt32(checkBox1.Checked) + Convert.ToDouble(textBox1.Text) * Convert.ToInt32(checkBox2.Checked) + Convert.ToDouble(textBox3.Text) * Convert.ToInt32(checkBox3.Checked) + Convert.ToDouble(textBox4.Text) * Convert.ToInt32(checkBox4.Checked) + Convert.ToDouble(textBox5.Text) * Convert.ToInt32(checkBox5.Checked);
+            sum = Convert.ToDouble(comboBox5.Text) * Convert.ToDouble(comboBox2.Text) * Convert.ToDouble(comboBox3.Text) * Convert.ToDouble(numericUpDown1.Text) + 
+                Convert.ToDouble(textBox6.Text) * Convert.ToInt32(checkBox1.Checked) + 
+                Convert.ToDouble(textBox1.Text) * Convert.ToInt32(checkBox2.Checked) + 
+                Convert.ToDouble(textBox3.Text) * Convert.ToInt32(checkBox3.Checked) + 
+                Convert.ToDouble(textBox4.Text) * Convert.ToInt32(checkBox4.Checked) + 
+                Convert.ToDouble(textBox5.Text) * Convert.ToInt32(checkBox5.Checked);
             textBox2.Text = Convert.ToString(sum);
         }
         private void SomethingChanged(object sender, EventArgs e)

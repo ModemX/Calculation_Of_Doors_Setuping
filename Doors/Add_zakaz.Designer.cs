@@ -48,14 +48,21 @@
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.Заказчик_ФИО = new System.Windows.Forms.TextBox();
+            this.Заказчик_ТелефонныйПрефикс = new System.Windows.Forms.TextBox();
+            this.Заказчик_Телефон = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(49, 239);
+            this.label5.Location = new System.Drawing.Point(49, 198);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 13);
             this.label5.TabIndex = 61;
@@ -83,7 +90,7 @@
             this.comboBox2.Items.AddRange(new object[] {
             "190",
             "200"});
-            this.comboBox2.Location = new System.Drawing.Point(152, 132);
+            this.comboBox2.Location = new System.Drawing.Point(153, 108);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(154, 21);
             this.comboBox2.TabIndex = 53;
@@ -94,7 +101,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(152, 83);
+            this.comboBox1.Location = new System.Drawing.Point(153, 68);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(154, 21);
             this.comboBox1.TabIndex = 52;
@@ -125,7 +132,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 192);
+            this.label3.Location = new System.Drawing.Point(50, 156);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 49;
@@ -134,7 +141,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(49, 140);
+            this.label2.Location = new System.Drawing.Point(50, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 48;
@@ -143,7 +150,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 91);
+            this.label1.Location = new System.Drawing.Point(50, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 47;
@@ -172,7 +179,7 @@
             "70",
             "80",
             "90"});
-            this.comboBox3.Location = new System.Drawing.Point(152, 184);
+            this.comboBox3.Location = new System.Drawing.Point(153, 148);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(154, 21);
             this.comboBox3.TabIndex = 63;
@@ -183,7 +190,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(100, 37);
+            this.checkBox1.Location = new System.Drawing.Point(127, 32);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(81, 17);
             this.checkBox1.TabIndex = 71;
@@ -193,7 +200,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(100, 77);
+            this.checkBox2.Location = new System.Drawing.Point(127, 65);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(81, 17);
             this.checkBox2.TabIndex = 72;
@@ -203,7 +210,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(100, 116);
+            this.checkBox3.Location = new System.Drawing.Point(127, 98);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(59, 17);
             this.checkBox3.TabIndex = 73;
@@ -213,7 +220,7 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(100, 159);
+            this.checkBox4.Location = new System.Drawing.Point(127, 131);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(55, 17);
             this.checkBox4.TabIndex = 74;
@@ -223,7 +230,7 @@
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(100, 199);
+            this.checkBox5.Location = new System.Drawing.Point(127, 164);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(57, 17);
             this.checkBox5.TabIndex = 75;
@@ -237,18 +244,18 @@
             this.groupBox1.Controls.Add(this.checkBox3);
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Location = new System.Drawing.Point(52, 282);
+            this.groupBox1.Location = new System.Drawing.Point(26, 231);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(254, 254);
+            this.groupBox1.Size = new System.Drawing.Size(311, 192);
             this.groupBox1.TabIndex = 65;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Дополнительно";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(152, 231);
+            this.numericUpDown1.Location = new System.Drawing.Point(152, 190);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(154, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(155, 20);
             this.numericUpDown1.TabIndex = 66;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
@@ -257,12 +264,66 @@
             0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.SomethingChanged);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.Заказчик_Телефон);
+            this.groupBox2.Controls.Add(this.Заказчик_ТелефонныйПрефикс);
+            this.groupBox2.Controls.Add(this.Заказчик_ФИО);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Location = new System.Drawing.Point(26, 429);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(311, 107);
+            this.groupBox2.TabIndex = 65;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Информация о заказщике";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(16, 34);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "ФИО:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(16, 70);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(201, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Контактный телефон:    +375 (            ) ";
+            // 
+            // Заказчик_ФИО
+            // 
+            this.Заказчик_ФИО.Location = new System.Drawing.Point(59, 31);
+            this.Заказчик_ФИО.Name = "Заказчик_ФИО";
+            this.Заказчик_ФИО.Size = new System.Drawing.Size(246, 20);
+            this.Заказчик_ФИО.TabIndex = 1;
+            // 
+            // Заказчик_ТелефонныйПрефикс
+            // 
+            this.Заказчик_ТелефонныйПрефикс.Location = new System.Drawing.Point(173, 67);
+            this.Заказчик_ТелефонныйПрефикс.Name = "Заказчик_ТелефонныйПрефикс";
+            this.Заказчик_ТелефонныйПрефикс.Size = new System.Drawing.Size(32, 20);
+            this.Заказчик_ТелефонныйПрефикс.TabIndex = 2;
+            // 
+            // Заказчик_Телефон
+            // 
+            this.Заказчик_Телефон.Location = new System.Drawing.Point(211, 67);
+            this.Заказчик_Телефон.Name = "Заказчик_Телефон";
+            this.Заказчик_Телефон.Size = new System.Drawing.Size(94, 20);
+            this.Заказчик_Телефон.TabIndex = 2;
+            // 
             // Add_zakaz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(365, 605);
             this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.comboBox2);
@@ -286,6 +347,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,5 +376,11 @@
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox Заказчик_Телефон;
+        private System.Windows.Forms.TextBox Заказчик_ТелефонныйПрефикс;
+        private System.Windows.Forms.TextBox Заказчик_ФИО;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
     }
 }

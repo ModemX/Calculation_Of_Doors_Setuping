@@ -77,6 +77,7 @@ namespace Doors
             if (cmd.ExecuteNonQuery() == 1)
             {
                 MessageBox.Show("Запись успешно добавлена.");
+                NewBlank blank = new NewBlank(max, dateTimePicker1.Value, Convert.ToInt32(comboBox1.SelectedIndex), Convert.ToInt32(comboBox2.Text), Convert.ToInt32(comboBox3.Text), Convert.ToInt32(numericUpDown1.Text), checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked, checkBox5.Checked, Заказчик_ФИО.Text, Convert.ToInt32(Заказчик_ТелефонныйПрефикс.Text), Convert.ToInt32(Заказчик_Телефон.Text));
             }
             Connection.Close();
         }
