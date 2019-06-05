@@ -49,11 +49,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.Заказчик_ФИО = new System.Windows.Forms.TextBox();
-            this.Заказчик_ТелефонныйПрефикс = new System.Windows.Forms.TextBox();
             this.Заказчик_Телефон = new System.Windows.Forms.TextBox();
+            this.Заказчик_ТелефонныйПрефикс = new System.Windows.Forms.TextBox();
+            this.Заказчик_ФИО = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -62,26 +62,29 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(49, 198);
+            this.label5.Location = new System.Drawing.Point(65, 244);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.Size = new System.Drawing.Size(86, 17);
             this.label5.TabIndex = 61;
             this.label5.Text = "Количество";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(49, 37);
+            this.label4.Location = new System.Drawing.Point(65, 46);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 13);
+            this.label4.Size = new System.Drawing.Size(42, 17);
             this.label4.TabIndex = 59;
             this.label4.Text = "Дата";
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(152, 31);
+            this.dateTimePicker1.Location = new System.Drawing.Point(203, 38);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(154, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(204, 22);
             this.dateTimePicker1.TabIndex = 54;
             // 
             // comboBox2
@@ -90,9 +93,10 @@
             this.comboBox2.Items.AddRange(new object[] {
             "190",
             "200"});
-            this.comboBox2.Location = new System.Drawing.Point(153, 108);
+            this.comboBox2.Location = new System.Drawing.Point(204, 133);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(154, 21);
+            this.comboBox2.Size = new System.Drawing.Size(204, 24);
             this.comboBox2.TabIndex = 53;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
             this.comboBox2.TextUpdate += new System.EventHandler(this.SomethingChanged);
@@ -101,9 +105,10 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(153, 68);
+            this.comboBox1.Location = new System.Drawing.Point(204, 84);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(154, 21);
+            this.comboBox1.Size = new System.Drawing.Size(204, 24);
             this.comboBox1.TabIndex = 52;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
             this.comboBox1.TextUpdate += new System.EventHandler(this.SomethingChanged);
@@ -111,9 +116,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(186, 554);
+            this.button2.Location = new System.Drawing.Point(248, 682);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(121, 26);
+            this.button2.Size = new System.Drawing.Size(161, 32);
             this.button2.TabIndex = 51;
             this.button2.Text = "отмена";
             this.button2.UseVisualStyleBackColor = true;
@@ -121,9 +127,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(61, 554);
+            this.button1.Location = new System.Drawing.Point(81, 682);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(121, 26);
+            this.button1.Size = new System.Drawing.Size(161, 32);
             this.button1.TabIndex = 50;
             this.button1.Text = "добавить";
             this.button1.UseVisualStyleBackColor = true;
@@ -132,42 +139,47 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 156);
+            this.label3.Location = new System.Drawing.Point(67, 192);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.Size = new System.Drawing.Size(89, 17);
             this.label3.TabIndex = 49;
             this.label3.Text = "Ширина (см)";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(50, 116);
+            this.label2.Location = new System.Drawing.Point(67, 143);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.Size = new System.Drawing.Size(87, 17);
             this.label2.TabIndex = 48;
             this.label2.Text = "Высота (см)";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 76);
+            this.label1.Location = new System.Drawing.Point(67, 94);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.Size = new System.Drawing.Size(68, 17);
             this.label1.TabIndex = 47;
             this.label1.Text = "Профиль";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(76, 554);
+            this.textBox1.Location = new System.Drawing.Point(101, 682);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(88, 20);
+            this.textBox1.Size = new System.Drawing.Size(116, 22);
             this.textBox1.TabIndex = 57;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(201, 558);
+            this.textBox2.Location = new System.Drawing.Point(268, 687);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(79, 20);
+            this.textBox2.Size = new System.Drawing.Size(104, 22);
             this.textBox2.TabIndex = 58;
             // 
             // comboBox3
@@ -179,9 +191,10 @@
             "70",
             "80",
             "90"});
-            this.comboBox3.Location = new System.Drawing.Point(153, 148);
+            this.comboBox3.Location = new System.Drawing.Point(204, 182);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(154, 21);
+            this.comboBox3.Size = new System.Drawing.Size(204, 24);
             this.comboBox3.TabIndex = 63;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.SomethingChanged);
             this.comboBox3.TextUpdate += new System.EventHandler(this.SomethingChanged);
@@ -190,9 +203,10 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(127, 32);
+            this.checkBox1.Location = new System.Drawing.Point(169, 39);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(81, 17);
+            this.checkBox1.Size = new System.Drawing.Size(99, 21);
             this.checkBox1.TabIndex = 71;
             this.checkBox1.Text = "Установка";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -200,9 +214,10 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(127, 65);
+            this.checkBox2.Location = new System.Drawing.Point(169, 80);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(81, 17);
+            this.checkBox2.Size = new System.Drawing.Size(103, 21);
             this.checkBox2.TabIndex = 72;
             this.checkBox2.Text = "Наличники";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -210,9 +225,10 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(127, 98);
+            this.checkBox3.Location = new System.Drawing.Point(169, 121);
+            this.checkBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(59, 17);
+            this.checkBox3.Size = new System.Drawing.Size(71, 21);
             this.checkBox3.TabIndex = 73;
             this.checkBox3.Text = "Замок";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -220,9 +236,10 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(127, 131);
+            this.checkBox4.Location = new System.Drawing.Point(169, 161);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(55, 17);
+            this.checkBox4.Size = new System.Drawing.Size(69, 21);
             this.checkBox4.TabIndex = 74;
             this.checkBox4.Text = "Ручка";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -230,9 +247,10 @@
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(127, 164);
+            this.checkBox5.Location = new System.Drawing.Point(169, 202);
+            this.checkBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(57, 17);
+            this.checkBox5.Size = new System.Drawing.Size(71, 21);
             this.checkBox5.TabIndex = 75;
             this.checkBox5.Text = "Петли";
             this.checkBox5.UseVisualStyleBackColor = true;
@@ -244,18 +262,21 @@
             this.groupBox1.Controls.Add(this.checkBox3);
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Location = new System.Drawing.Point(26, 231);
+            this.groupBox1.Location = new System.Drawing.Point(35, 284);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(311, 192);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(415, 236);
             this.groupBox1.TabIndex = 65;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Дополнительно";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(152, 190);
+            this.numericUpDown1.Location = new System.Drawing.Point(203, 234);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(155, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(207, 22);
             this.numericUpDown1.TabIndex = 66;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
@@ -271,57 +292,67 @@
             this.groupBox2.Controls.Add(this.Заказчик_ФИО);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(26, 429);
+            this.groupBox2.Location = new System.Drawing.Point(35, 528);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(311, 107);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(415, 132);
             this.groupBox2.TabIndex = 65;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Информация о заказщике";
             // 
-            // label6
+            // Заказчик_Телефон
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 34);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "ФИО:";
+            this.Заказчик_Телефон.Location = new System.Drawing.Point(281, 82);
+            this.Заказчик_Телефон.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Заказчик_Телефон.Name = "Заказчик_Телефон";
+            this.Заказчик_Телефон.Size = new System.Drawing.Size(124, 22);
+            this.Заказчик_Телефон.TabIndex = 2;
+            this.Заказчик_Телефон.TextChanged += new System.EventHandler(this.SomethingChanged);
+            // 
+            // Заказчик_ТелефонныйПрефикс
+            // 
+            this.Заказчик_ТелефонныйПрефикс.Location = new System.Drawing.Point(231, 82);
+            this.Заказчик_ТелефонныйПрефикс.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Заказчик_ТелефонныйПрефикс.Name = "Заказчик_ТелефонныйПрефикс";
+            this.Заказчик_ТелефонныйПрефикс.Size = new System.Drawing.Size(41, 22);
+            this.Заказчик_ТелефонныйПрефикс.TabIndex = 2;
+            this.Заказчик_ТелефонныйПрефикс.TextChanged += new System.EventHandler(this.SomethingChanged);
+            // 
+            // Заказчик_ФИО
+            // 
+            this.Заказчик_ФИО.Location = new System.Drawing.Point(79, 38);
+            this.Заказчик_ФИО.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Заказчик_ФИО.Name = "Заказчик_ФИО";
+            this.Заказчик_ФИО.Size = new System.Drawing.Size(327, 22);
+            this.Заказчик_ФИО.TabIndex = 1;
+            this.Заказчик_ФИО.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 70);
+            this.label7.Location = new System.Drawing.Point(21, 86);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(201, 13);
+            this.label7.Size = new System.Drawing.Size(268, 17);
             this.label7.TabIndex = 0;
             this.label7.Text = "Контактный телефон:    +375 (            ) ";
             // 
-            // Заказчик_ФИО
+            // label6
             // 
-            this.Заказчик_ФИО.Location = new System.Drawing.Point(59, 31);
-            this.Заказчик_ФИО.Name = "Заказчик_ФИО";
-            this.Заказчик_ФИО.Size = new System.Drawing.Size(246, 20);
-            this.Заказчик_ФИО.TabIndex = 1;
-            // 
-            // Заказчик_ТелефонныйПрефикс
-            // 
-            this.Заказчик_ТелефонныйПрефикс.Location = new System.Drawing.Point(173, 67);
-            this.Заказчик_ТелефонныйПрефикс.Name = "Заказчик_ТелефонныйПрефикс";
-            this.Заказчик_ТелефонныйПрефикс.Size = new System.Drawing.Size(32, 20);
-            this.Заказчик_ТелефонныйПрефикс.TabIndex = 2;
-            // 
-            // Заказчик_Телефон
-            // 
-            this.Заказчик_Телефон.Location = new System.Drawing.Point(211, 67);
-            this.Заказчик_Телефон.Name = "Заказчик_Телефон";
-            this.Заказчик_Телефон.Size = new System.Drawing.Size(94, 20);
-            this.Заказчик_Телефон.TabIndex = 2;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(21, 42);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(46, 17);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "ФИО:";
             // 
             // Add_zakaz
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 605);
+            this.ClientSize = new System.Drawing.Size(487, 745);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -338,6 +369,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBox2);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "Add_zakaz";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

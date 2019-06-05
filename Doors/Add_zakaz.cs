@@ -76,15 +76,21 @@ namespace Doors
             cmd.Parameters.AddWithValue("@p", checkBox5.Checked);
             if (cmd.ExecuteNonQuery() == 1)
             {
-                MessageBox.Show("Запись успешно добавлена.");
                 NewBlank blank = new NewBlank(max, dateTimePicker1.Value, Convert.ToInt32(comboBox1.SelectedIndex), Convert.ToInt32(comboBox2.Text), Convert.ToInt32(comboBox3.Text), Convert.ToInt32(numericUpDown1.Text), checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked, checkBox5.Checked, Заказчик_ФИО.Text, Convert.ToInt32(Заказчик_ТелефонныйПрефикс.Text), Convert.ToInt32(Заказчик_Телефон.Text));
+                MessageBox.Show("Запись успешно добавлена.");
             }
             Connection.Close();
         }
 
         private void CheckIsEverythingCorrect()
         {
-            if (numericUpDown1.Value > 0 && IsStringCorrectWordsOnly(comboBox1.Text) && IsStringCorrectPositiveDigitsOnly(comboBox2.Text) && IsStringCorrectPositiveDigitsOnly(comboBox3.Text))
+            if (numericUpDown1.Value > 0 &&
+                IsStringCorrectWordsOnly(comboBox1.Text) &&
+                IsStringCorrectPositiveDigitsOnly(comboBox2.Text) &&
+                IsStringCorrectPositiveDigitsOnly(comboBox3.Text) &&
+                IsStringCorrectWordsOnly(Заказчик_ФИО.Text) &&
+                IsStringCorrectPhonePrefix(Заказчик_ТелефонныйПрефикс.Text) &&
+                IsStringCorrectPhone(Заказчик_Телефон.Text))
             {
                 button1.Enabled = true;
             }
@@ -93,6 +99,42 @@ namespace Doors
                 button1.Enabled = false;
             }
         }
+
+        private bool IsStringCorrectPhone(string text)
+        {
+            if (text.Length == 7)
+            {
+                for (int i = 0; i < text.Length; i++)
+                {
+                    char symbol = text[i];
+                    if (char.IsNumber(symbol))
+                    {
+                        if (i == text.Length - 1)
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool IsStringCorrectPhonePrefix(string text)
+        {
+            if (text == "17" || text == "29" || text == "33" || text == "44")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void SomethingChanged(object sender, EventArgs e)
         {
             CheckIsEverythingCorrect();
@@ -102,7 +144,7 @@ namespace Doors
         {
             for (int i = 0; i < text.Length; i++)
             {
-                char symbol = (char)text[i];
+                char symbol = text[i];
                 if (char.IsLetter(symbol) || symbol == ' ')
                 {
                     if (i == text.Length - 1)
@@ -122,13 +164,13 @@ namespace Doors
         {
             for (int i = 0; i < text.Length; i++)
             {
-                char symbol = (char)text[i];
+                char symbol = text[i];
                 if (char.IsNumber(symbol))
                 {
                     if (i < text.Length)
                     {
                         int number = Convert.ToInt32(text);
-                        if (number >= 10)
+                        if (number >= 50)
                         {
                             return true;
                         }

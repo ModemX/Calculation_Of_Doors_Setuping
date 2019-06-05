@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Xceed.Words.NET;
-
+using Font = Xceed.Words.NET.Font;
 
 namespace Doors
 {
@@ -47,12 +47,13 @@ namespace Doors
                 $"именуемое в дальнейшем Заказчик с другой стороны, заключили настоящий договор " +
                 $"о нижеследующем." +
                 $"\n\n" +
-                $"1. Согласно настоящему договору Исполнитель обязуется по заданию Заказчика оказать следующие услуги: ")
-                .FontSize(12);
+                $"1. Согласно настоящему договору Исполнитель обязуется по заданию Заказчика оказать следующие услуги: ").
+                Font("Times New Roman").
+                FontSize(12);
 
             #region СписокТребований
             List СписокТребований = document.AddList();
-            document.AddListItem(СписокТребований, " выполнить изготовление двери(-ей)", 1, ListItemType.Numbered);
+            document.AddListItem(СписокТребований, $" выполнить изготовление двери(-ей), в количестве: {Количество} экземпляр(-ов)", 1, ListItemType.Numbered);
 
             if (ustanovka)
             {
@@ -79,16 +80,18 @@ namespace Doors
                 document.AddListItem(СписокТребований, " выполнить установку петель", 1, ListItemType.Numbered);
             }
 
-            document.InsertList(СписокТребований);
+            document.InsertList(СписокТребований, new Font("Times New Roman"), 12);
             #endregion
 
-            document.InsertParagraph("В свою очередь Заказчик обязуется оплатить эти услуги.\n");
-
+            document.InsertParagraph("В свою очередь Заказчик обязуется оплатить эти услуги.\n")
+                .Font("Times New Roman")
+                .FontSize(12);
             #region Калькулирование Стоимости
 
             int[] mass = new int[5];
-            List <double> ЦенаПрофиля = new List<double>();
+            List<double> ЦенаПрофиля = new List<double>();
 
+            #region Запросы к БД
             SqlConnection Connection = new SqlConnection(ConnectionString);
             try
             {
@@ -177,11 +180,14 @@ namespace Doors
             SqlDataReader myReader6 = comm6.ExecuteReader(CommandBehavior.CloseConnection);
             while (myReader6.Read())
             {
-                ЦенаПрофиля.Add(Math.Round(Convert.ToDouble(myReader6[0]),4));
+                ЦенаПрофиля.Add(Math.Round(Convert.ToDouble(myReader6[0]), 4));
             }
             Connection.Close();
 
-            double sum = ЦенаПрофиля[id_Профиля] * Высота * Ширина * Количество * + mass[0] * Convert.ToInt32(ustanovka) +
+            #endregion
+
+            double sum = ЦенаПрофиля[id_Профиля] * Высота * Ширина * Количество +
+                mass[0] * Convert.ToInt32(ustanovka) +
                 mass[1] * Convert.ToInt32(nalichniki) +
                 mass[2] * Convert.ToInt32(zamok) +
                 mass[3] * Convert.ToInt32(ruchka) +
@@ -189,37 +195,77 @@ namespace Doors
 
             #endregion
 
-            document.InsertParagraph($"2. Стоимость оказываемых услуг составляет: {sum} бел.руб.").Alignment=Alignment.both;
+            document.InsertParagraph($"2. Стоимость оказываемых услуг составляет: {sum} бел.руб.")
+            .Font("Times New Roman")
+            .FontSize(12)
+            .Alignment = Alignment.both;
 
-            document.InsertParagraph($"3. Услуги оплачиваются в течении четырнадцати календарных дней с момента заключения договора.");
+            document.InsertParagraph($"3. Услуги оплачиваются в течении четырнадцати календарных дней с момента заключения договора.")
+            .Font("Times New Roman")
+            .FontSize(12)
+            .Alignment = Alignment.both;
 
-            document.InsertParagraph($"4. В случае невозможности исполнения, возникшей по вине Заказчика, услуги подлежат оплате в полном объеме.");
+            document.InsertParagraph($"4. В случае невозможности исполнения, возникшей по вине Заказчика, услуги подлежат оплате в полном объеме.")
+            .Font("Times New Roman")
+            .FontSize(12)
+            .Alignment = Alignment.both;
 
-            document.InsertParagraph($"5. В случае, когда невозможность исполнения возникла по обстоятельствам, за которые ни одна из сторон не отвечает, Заказчик возмещает Исполнителю фактически понесенные им расходы.");
+            document.InsertParagraph($"5. В случае, когда невозможность исполнения возникла по обстоятельствам, за которые ни одна из сторон не отвечает, Заказчик возмещает Исполнителю фактически понесенные им расходы.")
+            .Font("Times New Roman")
+            .FontSize(12)
+            .Alignment = Alignment.both;
 
-            document.InsertParagraph($"6. Заказчик вправе отказаться от исполнения настоящего договора при условии оплаты Исполнителю фактически понесенных им расходов.");
+            document.InsertParagraph($"6. Заказчик вправе отказаться от исполнения настоящего договора при условии оплаты Исполнителю фактически понесенных им расходов.")
+            .Font("Times New Roman")
+            .FontSize(12)
+            .Alignment = Alignment.both;
 
-            document.InsertParagraph($"7. Исполнитель вправе отказаться от исполнения настоящего договора при условии полного возмещения Заказчику убытков.");
+            document.InsertParagraph($"7. Исполнитель вправе отказаться от исполнения настоящего договора при условии полного возмещения Заказчику убытков.")
+            .Font("Times New Roman")
+            .FontSize(12)
+            .Alignment = Alignment.both;
 
-            document.InsertParagraph($"8. К настоящему договору применяются общие положения о подряде (статьи 656 - 682 ГК РБ ) и положения о бытовом подряде (статьи 683 - 695 ГК РБ), если это не противоречит статьям 733 - 737 ГК, регулирующим вопросы возмездного оказания услуг.");
+            document.InsertParagraph($"8. К настоящему договору применяются общие положения о подряде (статьи 656 - 682 ГК РБ ) и положения о бытовом подряде (статьи 683 - 695 ГК РБ), если это не противоречит статьям 733 - 737 ГК, регулирующим вопросы возмездного оказания услуг.")
+            .Font("Times New Roman")
+            .FontSize(12)
+            .Alignment = Alignment.both;
 
-            document.InsertParagraph($"9. Срок действия настоящего договора:");
+            document.InsertParagraph($"9. Срок действия настоящего договора:")
+            .Font("Times New Roman")
+            .FontSize(12)
+            .Alignment = Alignment.both;
 
             #region Подсчет и увеличение срока заказа
             DateTime IncreasedDateOfOrdering = DateTime.Parse($"{ ДатаЗаказа.Day}.{ ДатаЗаказа.Month}.{ ДатаЗаказа.Year}");
-            IncreasedDateOfOrdering.AddDays(14);
+            IncreasedDateOfOrdering = IncreasedDateOfOrdering.AddDays(14);
             #endregion
 
             document.InsertParagraph($"Начало: {DataReturner(ДатаЗаказа.Day, ДатаЗаказа.Month, ДатаЗаказа.Year)}\n" +
-                $"Конец: {DataReturner(IncreasedDateOfOrdering.Day, IncreasedDateOfOrdering.Month, IncreasedDateOfOrdering.Year)}");
+                $"Конец: {DataReturner(IncreasedDateOfOrdering.Day, IncreasedDateOfOrdering.Month, IncreasedDateOfOrdering.Year)}")
+            .Font("Times New Roman")
+            .FontSize(12);
 
-            document.InsertParagraph("11. Договор составлен в 2-х экземплярах, по одному для каждой из сторон.\n" +
-                "12.Адреса и банковские реквизиты сторон:\n\n" +
-                "Заказчик:_____________________________________________________________________________________\n\n" +
-                "Исполнитель: \"ООО Наши Двери\", ул. Неизвестная 16, г.Минск. *Какие-то банковские реквизиты здесь*.\n\n\n");
+            document.InsertParagraph
+                ("11. Договор составлен в 2-х экземплярах, по одному для каждой из сторон.")
+            .Font("Times New Roman")
+            .FontSize(12)
+            .Alignment = Alignment.both;
 
-            document.InsertParagraph($"Подпись Заказчика: ____________________\n");
-            document.InsertParagraph($"Подпись Исполнителя: ____________________");
+            document.InsertParagraph
+                ("12.Адреса и банковские реквизиты сторон:\n\n" +
+                $"Заказчик:_________________________________________________________________________________________________________________________________________________________________________. Контактный телефон: +375({Заказчик_ТелефонныйПрефикс}){Заказчик_Телефон}\n\n" +
+                "Исполнитель: \"ООО Наши Двери\", ул. Неизвестная 16, г.Минск. \n*Какие-то банковские реквизиты здесь*.\n\n\n")
+            .Font("Times New Roman")
+            .FontSize(12);
+
+            document.InsertParagraph($"Подпись Заказчика: ____________________\n")
+            .Font("Times New Roman")
+            .FontSize(12);
+
+            document.InsertParagraph($"Подпись Исполнителя: ____________________")
+            .Font("Times New Roman")
+            .FontSize(12);
+
 
             document.Save();
         }
