@@ -59,7 +59,17 @@ namespace Doors
                 MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             SqlCommand comm = new SqlCommand("SELECT max(id_zakaz) FROM Zakazy", Connection);
-            int max = (int)comm.ExecuteScalar();
+            int max;
+            object temp = comm.ExecuteScalar();
+            if (temp is DBNull)
+            {
+                max = 0;
+            }
+            else
+            {
+                max = (int)temp;
+            }
+
             string sql = string.Format("Insert Into Zakazy" +
                   "(id_zakaz, data, id_profil, vysota, shirina, kolvo,ustanovka,nalichniki,zamok,ruchka,petli) Values(@kod, @data, @pr, @v, @sh, @k, @u, @nal, @z, @r, @p)");
             SqlCommand cmd = new SqlCommand(sql, Connection);

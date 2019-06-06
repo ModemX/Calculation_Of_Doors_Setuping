@@ -57,6 +57,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.ShowStatistics = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -301,11 +302,23 @@
             this.label1.Text = "label1";
             this.label1.Visible = false;
             // 
+            // ShowStatistics
+            // 
+            this.ShowStatistics.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ShowStatistics.Location = new System.Drawing.Point(972, 425);
+            this.ShowStatistics.Name = "ShowStatistics";
+            this.ShowStatistics.Size = new System.Drawing.Size(190, 43);
+            this.ShowStatistics.TabIndex = 64;
+            this.ShowStatistics.Text = "Просмотр статистики";
+            this.ShowStatistics.UseVisualStyleBackColor = true;
+            this.ShowStatistics.Click += new System.EventHandler(this.ShowStatistics_Click);
+            // 
             // Uchet_zakaz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1174, 479);
+            this.Controls.Add(this.ShowStatistics);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.comboBox3);
@@ -363,5 +376,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.Button ShowStatistics;
     }
 }

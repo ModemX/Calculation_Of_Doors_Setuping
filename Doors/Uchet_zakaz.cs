@@ -205,5 +205,11 @@ namespace Doors
         {
             System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\Resources\\HelpFile.chm");
         }
+
+        private void ShowStatistics_Click(object sender, EventArgs e)
+        {
+            Statistics statisticsWindow = new Statistics();
+            statisticsWindow.ShowDialog();
+        }
     }
 }
