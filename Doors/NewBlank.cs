@@ -266,10 +266,335 @@ namespace Doors
             .Font("Times New Roman")
             .FontSize(12);
 
-
             document.Save();
         }
+        public NewBlank
+            (
+            System.Windows.Forms.DataVisualization.Charting.Chart chartСпросЗаКвартал,
+            System.Windows.Forms.DataVisualization.Charting.Chart chartСпросЗаМесяц
+            )
+        {
+            string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + Application.StartupPath + @"\Resources\doors.mdf;Integrated Security=True;Connect Timeout=30";
 
+            Directory.CreateDirectory(Environment.CurrentDirectory + $@"\Отчеты по продажам\{DateTime.Now.Year}\{НазваниеМесяца(DateTime.Now.Month, true)}\");
+            string path = Environment.CurrentDirectory + $@"\Отчеты по продажам\{DateTime.Now.Year}\{НазваниеМесяца(DateTime.Now.Month, true)}\Отчет по продажам и предыдущий квартал ({НазваниеМесяца(DateTime.Now.Month, true)} {DateTime.Now.Year}).docx";
+            SqlConnection Connection = new SqlConnection(ConnectionString);
+
+            DocX document = DocX.Create(path);
+
+            document.MarginTop = 30;
+            document.MarginLeft = 30;
+            document.MarginRight = 30;
+            document.MarginBottom = 30;
+
+            document.InsertParagraph($"Дата составления: {DataReturner(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year)}\n").
+                Font("Times New Roman").
+                FontSize(11).
+                Alignment = Alignment.right;
+
+            document.InsertParagraph("Отчет о продажах за текущий месяц и предыдущий квартал\n\n").
+                 Font("Times New Roman").
+                 FontSize(28).
+                 Bold().
+                 Alignment = Alignment.center;
+
+            document.InsertParagraph("На приведенном ниже графике отображен график спроса дверей за месяц:\n")
+                .Font("Times New Roman")
+                .FontSize(12)
+                .Alignment = Alignment.left;
+
+            #region Составление и заполнение графиков продаж за месяц
+
+            PieChart WordChart_СпросЗаМесяц = new PieChart();
+            WordChart_СпросЗаМесяц.AddLegend(ChartLegendPosition.Right, false);
+
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            SqlCommand comm = new SqlCommand("SELECT count(id_profil) FROM Profili", Connection);
+            object Результат = comm.ExecuteScalar();
+
+            if (Результат != null)
+            {
+                int Количество_профилей = (int)Результат;
+
+                List<string> Name = new List<string>();
+                List<int> Value = new List<int>();
+                Series series = new Series("Спрос товара за месяц, группировка по профилю");
+
+                for (int i = 0; i < Количество_профилей; i++)
+                {
+                    comm = new SqlCommand($"SELECT profil FROM Profili where id_profil={i + 1}", Connection);
+                    string НазваниеПрофиля = (string)comm.ExecuteScalar();
+                    comm = new SqlCommand($"select kolvo from Zakazy where id_profil = {i + 1} and data between '{DateTime.Now.Year}/{DateTime.Now.Month}/01' and '{DateTime.Now.Year}/{DateTime.Now.Month}/{DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)}'", Connection);
+                    Результат = comm.ExecuteScalar();
+                    if (Результат != null)
+                    {
+                        Name.Add($"{НазваниеПрофиля} ({(int)Результат})");
+                        Value.Add((int)Результат);
+                    }
+                }
+                series.Bind(Name, Value);
+                WordChart_СпросЗаМесяц.AddSeries(series);
+            }
+            Connection.Close();
+            document.InsertChart(WordChart_СпросЗаМесяц);
+            #endregion
+
+            document.InsertParagraph("\n\nА также диаграмма продаж за предыдущий квартал. Она предоставлена ниже:\n")
+                .Font("Times New Roman")
+                .FontSize(12)
+                .Alignment = Alignment.left;
+
+            #region Составление и заполнение графиков продаж за предыдущий квартал
+
+            BarChart WordChart_СпросЗаКвартал = new BarChart();
+            WordChart_СпросЗаКвартал.AddLegend(ChartLegendPosition.Right, false);
+            WordChart_СпросЗаКвартал.BarDirection = BarDirection.Column;
+            WordChart_СпросЗаКвартал.BarGrouping = BarGrouping.Clustered;
+            WordChart_СпросЗаКвартал.GapWidth = 200;
+
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            comm = new SqlCommand("SELECT count(id_profil) FROM Profili", Connection);
+            Результат = comm.ExecuteScalar();
+
+            if (Результат != null)
+            {
+                List<string> Name = new List<string>();
+                List<int> Value = new List<int>();
+
+                switch (Statistics.КакойКварталОтобразить())
+                {
+                    case 1:
+                        {
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year - 1}/10/01' and " +
+                                $"'{DateTime.Now.Year - 1}/10/{DateTime.DaysInMonth(DateTime.Now.Year - 1, 10)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Октябрь ({DateTime.Now.Year - 1}) ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Октябрь ({DateTime.Now.Year - 1}) (0)");
+                                Value.Add(0);
+                            }
+
+
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year - 1}/11/01' and " +
+                                $"'{DateTime.Now.Year - 1}/11/{DateTime.DaysInMonth(DateTime.Now.Year - 1, 11)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Ноябрь ({DateTime.Now.Year - 1}) ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Ноябрь ({DateTime.Now.Year - 1}) (0)");
+                                Value.Add(0);
+                            }
+
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year - 1}/12/01' and " +
+                                $"'{DateTime.Now.Year - 1}/12/{DateTime.DaysInMonth(DateTime.Now.Year - 1, 12)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Декабрь ({DateTime.Now.Year - 1}) ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Декабрь ({DateTime.Now.Year - 1}) (0)");
+                                Value.Add(0);
+                            }
+                        }
+                        break;
+                    case 2:
+                        {
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year}/01/01' and " +
+                                $"'{DateTime.Now.Year}/01/{DateTime.DaysInMonth(DateTime.Now.Year, 01)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Январь ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Январь (0)");
+                                Value.Add(0);
+                            }
+                            Name.Add($"Январь");
+                            Value.Add((int)comm.ExecuteScalar());
+
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year}/02/01' and " +
+                                $"'{DateTime.Now.Year}/02/{DateTime.DaysInMonth(DateTime.Now.Year, 02)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Февраль ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Февраль (0)");
+                                Value.Add(0);
+                            }
+
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year}/03/01' and " +
+                                $"'{DateTime.Now.Year}/03/{DateTime.DaysInMonth(DateTime.Now.Year, 03)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Март ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Март (0)");
+                                Value.Add(0);
+                            }
+                        }
+                        break;
+                    case 3:
+                        {
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year}/04/01' and " +
+                                $"'{DateTime.Now.Year}/04/{DateTime.DaysInMonth(DateTime.Now.Year, 04)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Апрель ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Апрель (0)");
+                                Value.Add(0);
+                            }
+
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year}/05/01' and " +
+                                $"'{DateTime.Now.Year}/05/{DateTime.DaysInMonth(DateTime.Now.Year, 05)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Май ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Май (0)");
+                                Value.Add(0);
+                            }
+
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year}/06/01' and " +
+                                $"'{DateTime.Now.Year}/06/{DateTime.DaysInMonth(DateTime.Now.Year, 06)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Июнь ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Июнь (0)");
+                                Value.Add(0);
+                            }
+                        }
+                        break;
+                    case 4:
+                        {
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year}/07/01' and " +
+                                $"'{DateTime.Now.Year}/07/{DateTime.DaysInMonth(DateTime.Now.Year, 07)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Июль ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Июль (0)");
+                                Value.Add(0);
+                            }
+
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year}/08/01' and " +
+                                $"'{DateTime.Now.Year}/08/{DateTime.DaysInMonth(DateTime.Now.Year, 08)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Август ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Август (0)");
+                                Value.Add(0);
+                            }
+
+                            comm = new SqlCommand($"SELECT sum(kolvo) FROM Zakazy where data between " +
+                                $"'{DateTime.Now.Year}/09/01' and " +
+                                $"'{DateTime.Now.Year}/09/{DateTime.DaysInMonth(DateTime.Now.Year, 09)}'", Connection);
+                            Результат = comm.ExecuteScalar();
+                            if (Результат != null)
+                            {
+                                Name.Add($"Сентябрь ({(int)Результат})");
+                                Value.Add((int)Результат);
+                            }
+                            else
+                            {
+                                Name.Add($"Сентябрь (0)");
+                                Value.Add(0);
+                            }
+                        }
+                        break;
+                }
+
+                var series = new Series("Статистика проданных дверей за квартал");
+                series.Bind(Name, Value);
+                WordChart_СпросЗаКвартал.AddSeries(series);
+            }
+            Connection.Close();
+            document.InsertChart(WordChart_СпросЗаКвартал);
+
+            #endregion
+
+            try
+            {
+                document.Save();
+            }
+            catch (IOException)
+            {
+                MessageBox.Show($"Ошибка при сохранении. \n\nНе удалось записать в файл. Убедитесь что требуемый файл ({path}) закрыт. \n\nИгнорируйте следующее сообщение");
+            }
+            MessageBox.Show($"Отчет создан. Он находится в директории: \"{path}\".");
+        }
         private string DataReturner(int Day, int Month, int Year)
         {
             if (Day < 10 && Month < 10)
@@ -288,7 +613,46 @@ namespace Doors
             {
                 return $"{Day}.{Month}.{Year}";
             }
-
+        }
+        private string НазваниеМесяца(int НомерМесяца, bool ВернутьСЗаглавной)
+        {
+            if (ВернутьСЗаглавной)
+            {
+                switch (НомерМесяца)
+                {
+                    case 1: return "Январь";
+                    case 2: return "Февраль";
+                    case 3: return "Март";
+                    case 4: return "Апрель";
+                    case 5: return "Май";
+                    case 6: return "Июнь";
+                    case 7: return "Июль";
+                    case 8: return "Август";
+                    case 9: return "Сентябрь";
+                    case 10: return "Октябрь";
+                    case 11: return "Ноябрь";
+                    case 12: return "Декабрь";
+                }
+            }
+            else
+            {
+                switch (НомерМесяца)
+                {
+                    case 1: return "январь";
+                    case 2: return "февраль";
+                    case 3: return "март";
+                    case 4: return "апрель";
+                    case 5: return "май";
+                    case 6: return "июнь";
+                    case 7: return "июль";
+                    case 8: return "август";
+                    case 9: return "сентябрь";
+                    case 10: return "октябрь";
+                    case 11: return "ноябрь";
+                    case 12: return "декабрь";
+                }
+            }
+            return "";
         }
     }
 }

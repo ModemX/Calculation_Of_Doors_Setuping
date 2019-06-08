@@ -33,29 +33,32 @@ namespace Doors
                 MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             SqlCommand comm = new SqlCommand("SELECT count(id_profil) FROM Profili", Connection);
-            int Количество_профилей = (int)comm.ExecuteScalar();
-            if (Количество_профилей > 0)
+            object Количество_профилей = comm.ExecuteScalar();
+            if (Количество_профилей != null)
             {
-                for (int i = 0; i < Количество_профилей; i++)
+                if ((int)Количество_профилей > 0)
                 {
-                    comm = new SqlCommand($"SELECT profil FROM Profili where id_profil={i + 1}", Connection);
-                    string НазваниеПрофиля = (string)comm.ExecuteScalar();
-                    comm = new SqlCommand($"select kolvo from Zakazy where id_profil = {i + 1} and data between '{DateTime.Now.Year}/{DateTime.Now.Month}/01' and '{DateTime.Now.Year}/{DateTime.Now.Month}/{DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)}'", Connection);
-                    object Результат = comm.ExecuteScalar();
-                    int КоличествоДверейПоПрофилю = 0;
-                    if (Результат != null)
+                    for (int i = 0; i < (int)Количество_профилей; i++)
                     {
-                        КоличествоДверейПоПрофилю = (int)Результат;
-                        chartСпросЗаМесяц.Series[0].Points.Add(КоличествоДверейПоПрофилю);
-                        chartСпросЗаМесяц.Series[0].Points[i].Label = КоличествоДверейПоПрофилю.ToString();
-                        chartСпросЗаМесяц.Series[0].Points[i].LegendText = НазваниеПрофиля;
-                    }
-                    else
-                    {
-                        chartСпросЗаМесяц.Series[0].Points.Add(КоличествоДверейПоПрофилю);
-                        chartСпросЗаМесяц.Series[0].Points[i].Label = КоличествоДверейПоПрофилю.ToString();
-                        chartСпросЗаМесяц.Series[0].Points[i].LegendText = НазваниеПрофиля;
-                        chartСпросЗаМесяц.Series[0].Points[i].IsEmpty = true;
+                        comm = new SqlCommand($"SELECT profil FROM Profili where id_profil={i + 1}", Connection);
+                        string НазваниеПрофиля = (string)comm.ExecuteScalar();
+                        comm = new SqlCommand($"select kolvo from Zakazy where id_profil = {i + 1} and data between '{DateTime.Now.Year}/{DateTime.Now.Month}/01' and '{DateTime.Now.Year}/{DateTime.Now.Month}/{DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)}'", Connection);
+                        object Результат = comm.ExecuteScalar();
+                        int КоличествоДверейПоПрофилю = 0;
+                        if (Результат != null)
+                        {
+                            КоличествоДверейПоПрофилю = (int)Результат;
+                            chartСпросЗаМесяц.Series[0].Points.Add(КоличествоДверейПоПрофилю);
+                            chartСпросЗаМесяц.Series[0].Points[i].Label = КоличествоДверейПоПрофилю.ToString();
+                            chartСпросЗаМесяц.Series[0].Points[i].LegendText = НазваниеПрофиля;
+                        }
+                        else
+                        {
+                            chartСпросЗаМесяц.Series[0].Points.Add(КоличествоДверейПоПрофилю);
+                            chartСпросЗаМесяц.Series[0].Points[i].Label = КоличествоДверейПоПрофилю.ToString();
+                            chartСпросЗаМесяц.Series[0].Points[i].LegendText = НазваниеПрофиля;
+                            chartСпросЗаМесяц.Series[0].Points[i].IsEmpty = true;
+                        }
                     }
                 }
             }
@@ -63,7 +66,7 @@ namespace Doors
 
             for (int i = 0; i < chartСпросЗаМесяц.Series[0].Points.Count; i++)
             {
-                System.Windows.Forms.DataVisualization.Charting.DataPoint item = (System.Windows.Forms.DataVisualization.Charting.DataPoint)chartСпросЗаМесяц.Series[0].Points[i];
+                System.Windows.Forms.DataVisualization.Charting.DataPoint item = chartСпросЗаМесяц.Series[0].Points[i];
                 if (item.IsEmpty == true)
                 {
                     if (i == chartСпросЗаМесяц.Series[0].Points.Count - 1)
@@ -80,7 +83,6 @@ namespace Doors
                 }
             }
         }
-
         private void Initialize_chartСпросЗаКвартал()
         {
             string ConnectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=" + System.Windows.Forms.Application.StartupPath + @"\Resources\doors.mdf;Integrated Security=True;Connect Timeout=30";
@@ -175,48 +177,60 @@ namespace Doors
             {
                 case 1:
                     {
-                        chartСпросЗаКвартал.Series[0].Points.Add(1, КоличествоПроданныхДверейПоМесяцам[0]);
+                        chartСпросЗаКвартал.Series[0].Points.AddXY(1, КоличествоПроданныхДверейПоМесяцам[0]);
                         chartСпросЗаКвартал.Series[0].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[0].ToString();
-                        chartСпросЗаКвартал.Series[0].Points.Add(2, КоличествоПроданныхДверейПоМесяцам[1]);
-                        chartСпросЗаКвартал.Series[0].Points[1].Label = КоличествоПроданныхДверейПоМесяцам[1].ToString();
-                        chartСпросЗаКвартал.Series[0].Points.Add(3, КоличествоПроданныхДверейПоМесяцам[2]);
-                        chartСпросЗаКвартал.Series[0].Points[2].Label = КоличествоПроданныхДверейПоМесяцам[2].ToString();
+                        chartСпросЗаКвартал.Series[0].LegendText = "Январь";
+                        chartСпросЗаКвартал.Series[1].Points.AddXY(2, КоличествоПроданныхДверейПоМесяцам[1]);
+                        chartСпросЗаКвартал.Series[1].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[1].ToString();
+                        chartСпросЗаКвартал.Series[1].LegendText = "Февраль";
+                        chartСпросЗаКвартал.Series[2].Points.AddXY(3, КоличествоПроданныхДверейПоМесяцам[2]);
+                        chartСпросЗаКвартал.Series[2].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[2].ToString();
+                        chartСпросЗаКвартал.Series[2].LegendText = "Март";
                     }
                     break;
                 case 2:
                     {
-                        chartСпросЗаКвартал.Series[0].Points.Add(4, КоличествоПроданныхДверейПоМесяцам[0]);
+                        chartСпросЗаКвартал.Series[0].Points.AddXY(4, КоличествоПроданныхДверейПоМесяцам[0]);
                         chartСпросЗаКвартал.Series[0].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[0].ToString();
-                        chartСпросЗаКвартал.Series[0].Points.Add(5, КоличествоПроданныхДверейПоМесяцам[1]);
-                        chartСпросЗаКвартал.Series[0].Points[1].Label = КоличествоПроданныхДверейПоМесяцам[1].ToString();
-                        chartСпросЗаКвартал.Series[0].Points.Add(6, КоличествоПроданныхДверейПоМесяцам[2]);
-                        chartСпросЗаКвартал.Series[0].Points[2].Label = КоличествоПроданныхДверейПоМесяцам[2].ToString();
+                        chartСпросЗаКвартал.Series[0].LegendText = "Апрель";
+                        chartСпросЗаКвартал.Series[1].Points.AddXY(5, КоличествоПроданныхДверейПоМесяцам[1]);
+                        chartСпросЗаКвартал.Series[1].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[1].ToString();
+                        chartСпросЗаКвартал.Series[1].LegendText = "Май";
+                        chartСпросЗаКвартал.Series[2].Points.AddXY(6, КоличествоПроданныхДверейПоМесяцам[2]);
+                        chartСпросЗаКвартал.Series[2].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[2].ToString();
+                        chartСпросЗаКвартал.Series[2].LegendText = "Июнь";
                     }
                     break;
                 case 3:
                     {
-                        chartСпросЗаКвартал.Series[0].Points.Add(7, КоличествоПроданныхДверейПоМесяцам[0]);
+                        chartСпросЗаКвартал.Series[0].Points.AddXY(7, КоличествоПроданныхДверейПоМесяцам[0]);
                         chartСпросЗаКвартал.Series[0].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[0].ToString();
-                        chartСпросЗаКвартал.Series[0].Points.Add(8, КоличествоПроданныхДверейПоМесяцам[1]);
-                        chartСпросЗаКвартал.Series[0].Points[1].Label = КоличествоПроданныхДверейПоМесяцам[1].ToString();
-                        chartСпросЗаКвартал.Series[0].Points.Add(9, КоличествоПроданныхДверейПоМесяцам[2]);
-                        chartСпросЗаКвартал.Series[0].Points[2].Label = КоличествоПроданныхДверейПоМесяцам[2].ToString();
+                        chartСпросЗаКвартал.Series[0].LegendText = "Июль";
+                        chartСпросЗаКвартал.Series[1].Points.AddXY(8, КоличествоПроданныхДверейПоМесяцам[1]);
+                        chartСпросЗаКвартал.Series[1].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[1].ToString();
+                        chartСпросЗаКвартал.Series[1].LegendText = "Август";
+                        chartСпросЗаКвартал.Series[2].Points.AddXY(9, КоличествоПроданныхДверейПоМесяцам[2]);
+                        chartСпросЗаКвартал.Series[2].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[2].ToString();
+                        chartСпросЗаКвартал.Series[2].LegendText = "Сентябрь";
                     }
                     break;
                 case 4:
                     {
-                        chartСпросЗаКвартал.Series[0].Points.Add(10, КоличествоПроданныхДверейПоМесяцам[0]);
+                        chartСпросЗаКвартал.Series[0].Points.AddXY(10, КоличествоПроданныхДверейПоМесяцам[0]);
                         chartСпросЗаКвартал.Series[0].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[0].ToString();
-                        chartСпросЗаКвартал.Series[0].Points.Add(11, КоличествоПроданныхДверейПоМесяцам[1]);
-                        chartСпросЗаКвартал.Series[0].Points[1].Label = КоличествоПроданныхДверейПоМесяцам[1].ToString();
-                        chartСпросЗаКвартал.Series[0].Points.Add(12, КоличествоПроданныхДверейПоМесяцам[2]);
-                        chartСпросЗаКвартал.Series[0].Points[2].Label = КоличествоПроданныхДверейПоМесяцам[2].ToString();
+                        chartСпросЗаКвартал.Series[0].LegendText = "Октябрь";
+                        chartСпросЗаКвартал.Series[1].Points.AddXY(11, КоличествоПроданныхДверейПоМесяцам[1]);
+                        chartСпросЗаКвартал.Series[1].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[1].ToString();
+                        chartСпросЗаКвартал.Series[1].LegendText = "Декабрь";
+                        chartСпросЗаКвартал.Series[2].Points.AddXY(12, КоличествоПроданныхДверейПоМесяцам[2]);
+                        chartСпросЗаКвартал.Series[2].Points[0].Label = КоличествоПроданныхДверейПоМесяцам[2].ToString();
+                        chartСпросЗаКвартал.Series[2].LegendText = "Ноябрь";
                     }
                     break;
             }
         }
 
-        private int КакойКварталОтобразить()
+        public static int КакойКварталОтобразить()
         {
             DateTime DateTimeNow = DateTime.Now;
 
@@ -241,6 +255,11 @@ namespace Doors
             {
                 return 3;
             }
+        }
+
+        private void СоставитьОтчет_Click(object sender, EventArgs e)
+        {
+            NewBlank newBlank = new NewBlank(chartСпросЗаКвартал, chartСпросЗаМесяц);
         }
     }
 }
