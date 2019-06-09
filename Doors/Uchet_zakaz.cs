@@ -34,7 +34,7 @@ namespace Doors
             }
             SqlCommand comm = new SqlCommand("SELECT count(id_zakaz) FROM View1", Connection);
             int kol = (int)comm.ExecuteScalar();
-            label5.Text = "всего записей - " + Convert.ToString(kol);
+            Работа_с_запясями.Text = "Работа с записями (Всего записей: " + Convert.ToString(kol) + ")";
             if (kol > 0)
             {
                 dataGridView1.RowCount = kol + 1;
@@ -52,9 +52,9 @@ namespace Doors
                 for (int j = 0; j < 11; j++)
                 {
                     dataGridView1[j, i].Value = Convert.ToString(myReader[j + 1]);
-                    if ((dataGridView1[j, i].Value as string).Contains(" 12:00:00 AM"))
+                    if ((dataGridView1[j, i].Value as string).Contains(" 0:00:00"))
                     {
-                        dataGridView1[j, i].Value = (dataGridView1[j, i].Value as string).Replace(" 12:00:00 AM", "");
+                        dataGridView1[j, i].Value = (dataGridView1[j, i].Value as string).Replace(" 0:00:00", "");
                     }
                 }
                 i++;
@@ -91,41 +91,40 @@ namespace Doors
 
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
+            for (int index = 0; index < dataGridView1.Rows.Count - 1; ++index)
             {
-                dataGridView1.Rows[i].Selected = false;
-                for (int j = 0; j < dataGridView1.ColumnCount; j++)
-                {
-                    if (dataGridView1.Rows[i].Cells[j].Value != null)
-                    {
-                        if (dataGridView1.Rows[i].Cells[1].Value.ToString() == comboBox3.Text)
-                        {
-                            dataGridView1.Rows[i].Selected = true;
-                            break;
-                        }
-                    }
-                }
+                if (dataGridView1.Rows[index].Cells[1].Value.ToString() != comboBox3.Text)
+                    dataGridView1.Rows[index].Visible = false;
             }
+            button2.Enabled = false;
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
-
-                if (Convert.ToDateTime(dataGridView1.Rows[i].Cells[0].Value + " 12:00:00 AM") < dateTimePicker1.Value || Convert.ToDateTime(dataGridView1.Rows[i].Cells[0].Value + " 12:00:00 AM") > dateTimePicker2.Value)
+                if (Convert.ToDateTime(dataGridView1.Rows[i].Cells[0].Value + " 0:00:00") < dateTimePicker1.Value || Convert.ToDateTime(dataGridView1.Rows[i].Cells[0].Value + " 0:00:00") > dateTimePicker2.Value)
                 {
                     dataGridView1.Rows[i].Visible = false;
                 }
             }
+            button9.Enabled = false;
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
-            {
-                dataGridView1.Rows[i].Visible = true;
-            }
+            dataGridView1.Rows.Clear();
+            ShowData();
+            Selpr();
+            button9.Enabled = true;
+            button2.Enabled = true;
+            button5.Enabled = true;
+            ПоискПоКолву_От.Enabled = true;
+            ПоискПоКолву_До.Enabled = true;
+            ПоискПоЦене_От.Enabled = true;
+            ПоискПоЦене_До.Enabled = true;
+            button8.Enabled = true;
+            button6.Enabled = true;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -210,6 +209,173 @@ namespace Doors
         {
             Statistics statisticsWindow = new Statistics();
             statisticsWindow.ShowDialog();
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            bool flag = ПоискПоКолву_От.Value <= ПоискПоКолву_До.Value;
+            if (flag)
+            {
+                for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+                {
+                    bool flag2 = Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value) > Convert.ToInt32(ПоискПоКолву_До.Value) || Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value) < Convert.ToInt32(ПоискПоКолву_От.Value);
+                    if (flag2)
+                    {
+                        dataGridView1.Rows[i].Visible = false;
+                    }
+                }
+                button5.Enabled = false;
+                ПоискПоКолву_От.Enabled = false;
+                ПоискПоКолву_До.Enabled = false;
+            }
+        }
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            SqlConnection Connection = new SqlConnection(ConnectionString);
+            SqlCommand comm = new SqlCommand(string.Format("Select data, profil, vysota, shirina, kolvo, ustanovka, nalichnik, zamki, ruchki, petl, stoimost from View1 where id_zakaz = {0}", numericUpDown1.Value - 100000), Connection);
+            try
+            {
+                Connection.Open();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Проверьте, достаточно ли места на диске, достаточно ли прав у учетной записи для операций с БД (См. справку), файлы MDF и LDF не должны быть помечены \"Только для чтения\". \n\nВозможно стоит попробовать отключить БД и запустить программу еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                //Application.Exit();
+            }
+            SqlDataReader myReader = comm.ExecuteReader(CommandBehavior.CloseConnection);
+            dataGridView1.Rows.Clear();
+            dataGridView1.Rows.Add();
+            while (myReader.Read())
+            {
+                for (int i = 0; i < 11; i++)
+                {
+                    dataGridView1[i, 0].Value = Convert.ToString(myReader.GetValue(i));
+                    bool flag = (dataGridView1[i, 0].Value as string).Contains(" 0:00:00");
+                    if (flag)
+                    {
+                        dataGridView1[i, 0].Value = (dataGridView1[i, 0].Value as string).Replace(" 0:00:00", "");
+                    }
+                }
+            }
+            Connection.Close();
+            button9.Enabled = false;
+            button8.Enabled = false;
+            button6.Enabled = false;
+            button2.Enabled = false;
+            button5.Enabled = false;
+            ПоискПоКолву_От.Enabled = false;
+            ПоискПоКолву_До.Enabled = false;
+            ПоискПоЦене_От.Enabled = false;
+            ПоискПоЦене_До.Enabled = false;
+        }
+
+        private void Button8_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                bool flag = Convert.ToDouble(dataGridView1.Rows[i].Cells[10].Value) > Convert.ToDouble(ПоискПоЦене_До.Text) || Convert.ToDouble(dataGridView1.Rows[i].Cells[10].Value) < Convert.ToDouble(ПоискПоЦене_От.Text);
+                if (flag)
+                {
+                    dataGridView1.Rows[i].Visible = false;
+                }
+            }
+            button8.Enabled = false;
+        }
+
+        private void ПоискПоКолву_SomethingChanged(object sender, EventArgs e)
+        {
+            bool flag = ПоискПоКолву_От.Value > ПоискПоКолву_До.Value;
+            if (flag)
+            {
+                button5.Enabled = false;
+            }
+            else
+            {
+                button5.Enabled = true;
+            }
+        }
+        private void ПоискПоЦене_SomethingChanged(object sender, EventArgs e)
+        {
+            string temp = "";
+            double ЦенаОт = 0.0;
+            double ЦенаДо = 0.0;
+            bool Is_ЦенаОт_correct = false;
+            for (int i = 0; i < ПоискПоЦене_От.Text.Length; i++)
+            {
+                char symbol = ПоискПоЦене_От.Text[i];
+                bool flag = char.IsDigit(symbol) || symbol == ',' || symbol == '.';
+                if (!flag)
+                {
+                    button8.Enabled = false;
+                    Is_ЦенаОт_correct = false;
+                    break;
+                }
+                bool flag2 = symbol == '.';
+                if (flag2)
+                {
+                    temp += ",";
+                }
+                else
+                {
+                    temp += symbol.ToString();
+                }
+                bool flag3 = i == ПоискПоЦене_От.Text.Length - 1;
+                if (flag3)
+                {
+                    bool flag4 = !double.TryParse(temp, out ЦенаОт);
+                    if (flag4)
+                    {
+                        button8.Enabled = false;
+                        Is_ЦенаОт_correct = false;
+                        break;
+                    }
+                    Is_ЦенаОт_correct = true;
+                    temp = "";
+                }
+            }
+            bool flag5 = Is_ЦенаОт_correct;
+            if (flag5)
+            {
+                for (int j = 0; j < ПоискПоЦене_До.Text.Length; j++)
+                {
+                    char symbol2 = ПоискПоЦене_До.Text[j];
+                    bool flag6 = char.IsDigit(symbol2) || symbol2 == ',' || symbol2 == '.';
+                    if (!flag6)
+                    {
+                        button8.Enabled = false;
+                        break;
+                    }
+                    bool flag7 = symbol2 == '.';
+                    if (flag7)
+                    {
+                        temp += ",";
+                    }
+                    else
+                    {
+                        temp += symbol2.ToString();
+                    }
+                    bool flag8 = j == ПоискПоЦене_До.Text.Length - 1;
+                    if (flag8)
+                    {
+                        bool flag9 = !double.TryParse(temp, out ЦенаДо);
+                        if (flag9)
+                        {
+                            button8.Enabled = false;
+                            break;
+                        }
+                        bool flag10 = ЦенаОт > ЦенаДо;
+                        if (flag10)
+                        {
+                            button8.Enabled = false;
+                        }
+                        else
+                        {
+                            button8.Enabled = true;
+                        }
+                    }
+                }
+            }
+
         }
     }
 }
