@@ -3,7 +3,7 @@
   <Class Name="Doors.Add_zakaz">
     <Position X="6.75" Y="1.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>ASAAAABAACAAABASAACEAEACAAAYAQAAEGgAEAEAAAA=</HashCode>
+      <HashCode>ASAAAAhAEGAAABAyCACEAEACAAAYAQAAEGgAEAEAAAA=</HashCode>
       <FileName>Add_zakaz.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,8 +38,22 @@
   <Class Name="Doors.Uchet_zakaz">
     <Position X="12.25" Y="1.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>ASAAAAAAACAAAFASAECAAAACAEg6BwgAcCAJAAAIYAA=</HashCode>
+      <HashCode>ASEAAARAACAABFYSIECAAAAWAMy7Bw4AcCAJQAAIcQA=</HashCode>
       <FileName>Uchet_zakaz.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Doors.NewBlank">
+    <Position X="4.75" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>NewBlank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Doors.Statistics">
+    <Position X="9.5" Y="10" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACACAEAAAACIACACAAAAAABAABAAAAAAAQA=</HashCode>
+      <FileName>Statistics.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
